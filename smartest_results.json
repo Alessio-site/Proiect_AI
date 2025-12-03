@@ -5683,5 +5683,1645 @@
       "message": "Strategie corectă identificată. (Scor redus: Argumentare insuficientă)"
     },
     "calculated_truth": "backtracking with MRV + forward checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:45:28",
+    "index": 0,
+    "question": "La o problemă de Colorare Graf (|V|=40, |E|=800, k=3 culori), ce strategie e optimă? Justifică.",
+    "problem_type": "graph coloring",
+    "params": {
+      "V": 40,
+      "E": 800,
+      "k": 3
+    },
+    "user_answer": "bshjcbks",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "None",
+      "truth_recalculated": "ac-3 with backtracking",
+      "calculations_used": {
+        "V": 40,
+        "E": 800,
+        "k": 3,
+        "max_edges": 780,
+        "density": 1.0256,
+        "density_percent": 102.56,
+        "avg_degree": 40.0,
+        "is_dense": true,
+        "brute_space": Infinity,
+        "brute_space_formatted": "∞",
+        "ac3_overhead": 7200,
+        "ac3_overhead_formatted": "7.200",
+        "estimated_chromatic": 41,
+        "likely_colorable": false,
+        "threshold_used": 0.35,
+        "recommendation": "ac-3"
+      },
+      "message": "Nu am identificat clar o strategie în răspunsul tău."
+    },
+    "calculated_truth": "Ac-3 With Backtracking"
+  },
+  {
+    "timestamp": "2025-12-03 21:46:23",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Strategia optimă este Backtracking cu MRV + Forward Checking. \r\n\r\nPentru N=12, spațiul de căutare este 12!  = 479 milioane configurații.  \r\nCu optimizările MRV (Minimum Remaining Values) și Forward Checking, \r\nacest spațiu se reduce semnificativ (~85%).  Strategia este completă \r\nși garantează găsirea soluției.  MRV alege întotdeauna regina cu cele \r\nmai puține poziții valide rămase (fail-first), iar Forward Checking \r\nelimină valorile inconsistente imediat după fiecare plasare.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:46:44",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este alegerea corectă.\r\n\r\nN=12 reprezintă o instanță de dimensiune medie, perfect gestionabilă \r\npentru metode complete de căutare. Avantajele acestei strategii:\r\n\r\n1.  COMPLETITUDINE: Garantează găsirea soluției\r\n2. MRV (Minimum Remaining Values): Reduce backtracking-ul alegând \r\n   regina cu cele mai puține opțiuni valide\r\n3. Forward Checking: Detectează conflictele devreme prin propagarea \r\n   constrângerilor\r\n\r\nPlain DFS ar fi prea lent fără aceste optimizări, iar Min-Conflicts \r\nnu e necesar pentru o instanță atât de mică.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:47:27",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Strategia optimă este Backtracking cu MRV + Forward Checking. \r\n\r\nPentru N=12, spațiul de căutare este 12!  = 479 milioane configurații.  \r\nCu optimizările MRV (Minimum Remaining Values) și Forward Checking, \r\nacest spațiu se reduce semnificativ (~85%).  Strategia este completă \r\nși garantează găsirea soluției.  MRV alege întotdeauna regina cu cele \r\nmai puține poziții valide rămase (fail-first), iar Forward Checking \r\nelimină valorile inconsistente imediat după fiecare plasare.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:48:10",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este alegerea corectă.\r\n\r\nN=12 reprezintă o instanță de dimensiune medie, perfect gestionabilă \r\npentru metode complete de căutare. Avantajele acestei strategii:\r\n\r\n1.  COMPLETITUDINE: Garantează găsirea soluției\r\n2. MRV (Minimum Remaining Values): Reduce backtracking-ul alegând \r\n   regina cu cele mai puține opțiuni valide\r\n3. Forward Checking: Detectează conflictele devreme prin propagarea \r\n   constrângerilor\r\n\r\nPlain DFS ar fi prea lent fără aceste optimizări, iar Min-Conflicts \r\nnu e necesar pentru o instanță atât de mică.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:48:24",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Aleg Min-Conflicts Heuristic pentru că este cel mai rapid.\r\n\r\nPlasăm aleator cele 12 regine, apoi iterativ mutăm regina cu cele \r\nmai multe conflicte în poziția cu cele mai puține conflicte.  \r\nAceastă căutare locală converge rapid către soluție.",
+    "score": 26.8,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.67,
+      "detected_intent": "None",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Nu am identificat clar o strategie în răspunsul tău. (Argumentare bună dar pentru strategia greșită)"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:48:38",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Plain DFS este optim pentru această problemă.  Explorăm în adâncime \r\nfiecare configurație posibilă folosind o stivă.  Algoritmul este \r\nsimplu și eficient pentru probleme de dimensiune mică.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "plain dfs (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'plain dfs', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'plain dfs', nu 'min-conflicts heuristic'! CONTRADICȚIE FACTUALĂ: Afirmi că N=12 e mic/gestionabil, dar spațiul de căutare DEPĂȘEȘTE pragul de fezabilitate pentru Backtracking."
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:48:59",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "AC-3 with Backtracking este cel mai potrivit.  Consistența arcurilor \r\nreduce domeniile tuturor variabilelor înainte de căutare, eliminând \r\nmulte configurații invalide din start.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "ac-3 with backtracking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'ac-3 with backtracking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'ac-3 with backtracking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:49:18",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV + Forward Checking este optim. \r\n\r\nFuncționează prin încălzirea sistemului la o temperatură inițială \r\nridicată, apoi răcirea treptată. La fiecare pas, acceptăm mutări \r\ncare reduc energia (conflictele) dar și ocazional mutări proaste \r\npentru a scăpa din minime locale.  MRV ajută la selectarea reginei.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'simulated annealing', nu 'min-conflicts heuristic'! Penalizare: concepte incompatibile detectate: temperatura."
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:49:32",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Alegem Backtracking with MRV + Forward Checking. \r\n\r\nAlgoritmul folosește o populație de configurații și aplică operatori \r\nde crossover și mutație pentru a evolua către soluție. MRV selectează \r\ncromozomul cu fitness-ul minim, iar Forward Checking elimină genele \r\ninvalide din pool-ul genetic.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'genetic algorithm', nu 'min-conflicts heuristic'! Penalizare: concepte incompatibile detectate: populatie."
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:49:46",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este corect.\r\n\r\nDeoarece graful este rar (sparse) cu densitate mică, nu avem nevoie \r\nde AC-3. MRV alege nodul cu cele mai puține culori disponibile, iar \r\nFC propagă constrângerile pe muchiile grafului.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:49:58",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV + Forward Checking este soluția optimă.\r\n\r\nAceastă strategie funcționează pentru că N=12 este un număr MARE, \r\niar spațiul de căutare este ENORM și imposibil de explorat exhaustiv. \r\nBacktracking-ul ne permite să sărim peste regiuni întregi ale spațiului.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'! Penalizare: concepte incompatibile detectate: exhaustiv."
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:50:10",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Strategia corectă este Backtracking with MRV + Forward Checking.\r\n\r\nO alegem deoarece problema Turnurilor din Hanoi...  adică N-Queens...  \r\nare o structură recursivă naturală.  Mutăm N-1 regine pe o coloană \r\nauxiliară, plasăm regina mare, apoi mutăm cele N-1 înapoi. \r\nFormula este 2^12 - 1 = 4095 mutări.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "min-conflicts heuristic",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": false,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 10000000,
+        "recommendation": "min-conflicts"
+      },
+      "message": "Ai ales 'backtracking with mrv + forward checking', dar răspunsul corect este 'min-conflicts heuristic'. EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'min-conflicts heuristic'!"
+    },
+    "calculated_truth": "Min-Conflicts Heuristic"
+  },
+  {
+    "timestamp": "2025-12-03 21:53:48",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Strategia optimă este Backtracking cu MRV + Forward Checking. \r\n\r\nPentru N=12, spațiul de căutare este 12!  = 479 milioane configurații.  \r\nCu optimizările MRV (Minimum Remaining Values) și Forward Checking, \r\nacest spațiu se reduce semnificativ (~85%).  Strategia este completă \r\nși garantează găsirea soluției.  MRV alege întotdeauna regina cu cele \r\nmai puține poziții valide rămase (fail-first), iar Forward Checking \r\nelimină valorile inconsistente imediat după fiecare plasare.",
+    "score": 83.4,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.67,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. ✗ 12! = 479.00 milioane"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:08",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Aleg Backtracking with MRV + Forward Checking. \r\n\r\nCalcule:\r\n- Spațiu brut: 12^12 = 8. 9 trilioane poziții\r\n- Backtracking simplu: 12!  = 479.001.600 noduri\r\n- Cu MRV + FC: reduce cu ~85%, deci ~72 milioane noduri\r\n\r\nAceastă complexitate este gestionabilă pentru un algoritm complet.\r\nMRV aplică principiul \"fail-first\" - alegem variabila cu domeniul \r\ncel mai mic, detectând eșecurile devreme.  Forward Checking propagă \r\nconstrângerile eliminând poziții atacate din domeniile celorlalte regine. \r\n\r\nAlgoritmul garantează găsirea soluției dacă există.",
+    "score": 93.8,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.88,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. ✓ Calcul corect pentru 12!"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:18",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este alegerea corectă.\r\n\r\nN=12 reprezintă o instanță de dimensiune medie, perfect gestionabilă \r\npentru metode complete de căutare. Avantajele acestei strategii:\r\n\r\n1.  COMPLETITUDINE: Garantează găsirea soluției\r\n2. MRV (Minimum Remaining Values): Reduce backtracking-ul alegând \r\n   regina cu cele mai puține opțiuni valide\r\n3. Forward Checking: Detectează conflictele devreme prin propagarea \r\n   constrângerilor\r\n\r\nPlain DFS ar fi prea lent fără aceste optimizări, iar Min-Conflicts \r\nnu e necesar pentru o instanță atât de mică.",
+    "score": 85.8,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.72,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:27",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Aleg Min-Conflicts Heuristic pentru că este cel mai rapid.\r\n\r\nPlasăm aleator cele 12 regine, apoi iterativ mutăm regina cu cele \r\nmai multe conflicte în poziția cu cele mai puține conflicte.  \r\nAceastă căutare locală converge rapid către soluție.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "None",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Nu am identificat clar o strategie în răspunsul tău. EROARE: Descrierea ta corespunde strategiei 'min-conflicts heuristic', nu 'backtracking with mrv + forward checking'! Penalizare: concepte incompatibile detectate: aleator."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:36",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Plain DFS este optim pentru această problemă.  Explorăm în adâncime \r\nfiecare configurație posibilă folosind o stivă.  Algoritmul este \r\nsimplu și eficient pentru probleme de dimensiune mică.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "plain dfs (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Ai ales 'plain dfs', dar răspunsul corect este 'backtracking with mrv + forward checking'. EROARE: Descrierea ta corespunde strategiei 'plain dfs', nu 'backtracking with mrv + forward checking'!"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:44",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "AC-3 with Backtracking este cel mai potrivit.  Consistența arcurilor \r\nreduce domeniile tuturor variabilelor înainte de căutare, eliminând \r\nmulte configurații invalide din start.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "ac-3 with backtracking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Ai ales 'ac-3 with backtracking', dar răspunsul corect este 'backtracking with mrv + forward checking'. EROARE: Descrierea ta corespunde strategiei 'ac-3 with backtracking', nu 'backtracking with mrv + forward checking'!"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:54:52",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV + Forward Checking este optim. \r\n\r\nFuncționează prin încălzirea sistemului la o temperatură inițială \r\nridicată, apoi răcirea treptată. La fiecare pas, acceptăm mutări \r\ncare reduc energia (conflictele) dar și ocazional mutări proaste \r\npentru a scăpa din minime locale.  MRV ajută la selectarea reginei.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'simulated annealing', nu 'backtracking with mrv + forward checking'! Penalizare: concepte incompatibile detectate: temperatura."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:55:03",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Alegem Backtracking with MRV + Forward Checking. \r\n\r\nAlgoritmul folosește o populație de configurații și aplică operatori \r\nde crossover și mutație pentru a evolua către soluție. MRV selectează \r\ncromozomul cu fitness-ul minim, iar Forward Checking elimină genele \r\ninvalide din pool-ul genetic.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'genetic algorithm', nu 'backtracking with mrv + forward checking'! Penalizare: concepte incompatibile detectate: populatie, fitness."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:55:12",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este corect.\r\n\r\nDeoarece graful este rar (sparse) cu densitate mică, nu avem nevoie \r\nde AC-3. MRV alege nodul cu cele mai puține culori disponibile, iar \r\nFC propagă constrângerile pe muchiile grafului.",
+    "score": 73.7,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.47,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:55:39",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV + Forward Checking este optim. \r\n\r\nFuncționează prin încălzirea sistemului la o temperatură inițială \r\nridicată, apoi răcirea treptată. La fiecare pas, acceptăm mutări \r\ncare reduc energia (conflictele) dar și ocazional mutări proaste \r\npentru a scăpa din minime locale.  MRV ajută la selectarea reginei.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'simulated annealing', nu 'backtracking with mrv + forward checking'! Penalizare: concepte incompatibile detectate: temperatura."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:56:01",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este corect.\r\n\r\nDeoarece graful este rar (sparse) cu densitate mică, nu avem nevoie \r\nde AC-3. MRV alege nodul cu cele mai puține culori disponibile, iar \r\nFC propagă constrângerile pe muchiile grafului.",
+    "score": 73.7,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.47,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:56:14",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Backtracking cu MRV + Forward Checking este soluția optimă.\r\n\r\nAceastă strategie funcționează pentru că N=12 este un număr MARE, \r\niar spațiul de căutare este ENORM și imposibil de explorat exhaustiv. \r\nBacktracking-ul ne permite să sărim peste regiuni întregi ale spațiului.",
+    "score": 35.9,
+    "components": {
+      "selection_score": 0.5,
+      "reasoning_score": 0.22,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. CONTRADICȚIE FACTUALĂ: Afirmi că N=12 e mare/complex, dar este perfect gestionabil pentru Backtracking cu MRV+FC."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:56:26",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "MRV + Forward Checking cu Backtracking este alegerea corectă. \r\n\r\nAlgoritmul explorează nivel cu nivel (breadth-first) toate configurațiile, \r\nfolosind o coadă pentru a gestiona stările. MRV prioritizează nodurile \r\ndin coadă, iar FC filtrează stările invalide înainte de expandare.",
+    "score": 0.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'plain bfs', nu 'backtracking with mrv + forward checking'!"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 21:56:38",
+    "index": 2,
+    "question": "Având problema N-Queens cu N=12, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 12
+    },
+    "user_answer": "Strategia corectă este Backtracking with MRV + Forward Checking.\r\n\r\nO alegem deoarece problema Turnurilor din Hanoi...  adică N-Queens...  \r\nare o structură recursivă naturală.  Mutăm N-1 regine pe o coloană \r\nauxiliară, plasăm regina mare, apoi mutăm cele N-1 înapoi. \r\nFormula este 2^12 - 1 = 4095 mutări.",
+    "score": 35.4,
+    "components": {
+      "selection_score": 0.5,
+      "reasoning_score": 0.21,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "calculations_used": {
+        "N": 12,
+        "brute_space": 8916100448256,
+        "brute_space_formatted": "8.92 trilioane",
+        "factorial_space": 479001600,
+        "factorial_formatted": "479.00 milioane",
+        "bt_mrv_fc_estimate": 71850240,
+        "bt_mrv_fc_formatted": "71.85 milioane",
+        "min_conflicts_estimate": 7200,
+        "min_conflicts_formatted": "7.200",
+        "bt_feasible": true,
+        "efficiency_ratio": 9979.2,
+        "threshold_used": 100000000,
+        "recommendation": "backtracking"
+      },
+      "message": "Strategie corectă identificată. CONTRADICȚIE FACTUALĂ: Afirmi că N=12 e mare/complex, dar este perfect gestionabil pentru Backtracking cu MRV+FC."
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
+  },
+  {
+    "timestamp": "2025-12-03 22:17:53",
+    "index": 1,
+    "question": "Pentru Turnurile din Hanoi (4 tije, 20 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 4,
+      "disks": 20
+    },
+    "user_answer": "Strategia optimă este Recursive Strategy (Divide and Conquer). \r\n\r\nPentru Turnurile din Hanoi cu 4 tije și 20 discuri, problema are o \r\nstructură recursivă naturală care se pretează perfect la Divide et Conquer. \r\n\r\nAlgoritmul Frame-Stewart funcționează astfel:\r\n1.  Împarte cele 20 discuri în grupuri\r\n2. Folosește tijele suplimentare (a 4-a tijă) pentru a reduce numărul de mutări\r\n3. Aplică recursiv strategia pentru fiecare subgrup\r\n\r\nCu 3 tije, ar fi nevoie de 2^20 - 1 = 1. 048.575 mutări.\r\nCu 4 tije (Frame-Stewart), numărul se reduce dramatic la aproximativ \r\n2 × 20 × √20 ≈ 179 mutări.\r\n\r\nAceastă strategie exploatează substructura optimă a problemei - soluția \r\noptimă pentru n discuri se construiește din soluțiile optime pentru \r\nsubprobleme mai mici.  BFS sau DFS ar explora inutil 4^20 stări.",
+    "score": 5.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.03,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "bfs"
+      ],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs. CONTRADICȚIE FACTUALĂ: Afirmi că problema e clasică (3 tije), dar de fapt are 4 tije (generalizată). (Penalizare: 1 concepte incompatibile)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:24:34",
+    "index": 1,
+    "question": "Pentru Turnurile din Hanoi (4 tije, 20 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 4,
+      "disks": 20
+    },
+    "user_answer": "Strategia optimă este Recursive Strategy (Divide and Conquer). \r\n\r\nPentru Turnurile din Hanoi cu 4 tije și 20 discuri, problema are o \r\nstructură recursivă naturală care se pretează perfect la Divide et Conquer. \r\n\r\nAlgoritmul Frame-Stewart funcționează astfel:\r\n1.  Împarte cele 20 discuri în grupuri\r\n2. Folosește tijele suplimentare (a 4-a tijă) pentru a reduce numărul de mutări\r\n3. Aplică recursiv strategia pentru fiecare subgrup\r\n\r\nCu 3 tije, ar fi nevoie de 2^20 - 1 = 1. 048.575 mutări.\r\nCu 4 tije (Frame-Stewart), numărul se reduce dramatic la aproximativ \r\n2 × 20 × √20 ≈ 179 mutări.\r\n\r\nAceastă strategie exploatează substructura optimă a problemei - soluția \r\noptimă pentru n discuri se construiește din soluțiile optime pentru \r\nsubprobleme mai mici.  BFS sau DFS ar explora inutil 4^20 stări.",
+    "score": 92.3,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.85,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. ✓ Corect: 2^20-1 = 178"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:24:42",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "sldvldskv",
+    "score": 0.2,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "None",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Nu am identificat clar o strategie în răspunsul tău."
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:25:36",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Aleg Recursive Strategy (Divide and Conquer). \r\n\r\nPentru Turnurile din Hanoi cu 3 tije și 5 discuri, aceasta este \r\nsingura strategie optimă, demonstrată matematic. \r\n\r\nAlgoritmul funcționează recursiv:\r\n1. Mută primele 4 discuri de pe tija sursă pe tija auxiliară\r\n2. Mută discul cel mare (al 5-lea) pe tija destinație\r\n3.  Mută cele 4 discuri de pe tija auxiliară pe tija destinație\r\n\r\nFormula matematică: T(n) = 2×T(n-1) + 1, cu soluția T(n) = 2^n - 1\r\nPentru n=5: 2^5 - 1 = 31 mutări (numărul MINIM posibil). \r\n\r\nAceastă strategie exploatează perfect substructura optimă a problemei - \r\nfiecare subproblemă se rezolvă identic.  Nu avem nevoie de căutare \r\n(BFS/DFS) deoarece construim direct soluția optimă.",
+    "score": 96.0,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.92,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. ✓ Corect: 2^5-1 = 31"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:26:41",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Aleg Recursive Strategy (Divide and Conquer). \r\n\r\nPentru Turnurile din Hanoi cu 3 tije și 5 discuri, aceasta este \r\nsingura strategie optimă, demonstrată matematic. \r\n\r\nAlgoritmul funcționează recursiv:\r\n1. Mută primele 4 discuri de pe tija sursă pe tija auxiliară\r\n2. Mută discul cel mare (al 5-lea) pe tija destinație\r\n3.  Mută cele 4 discuri de pe tija auxiliară pe tija destinație\r\n\r\nFormula matematică: T(n) = 2×T(n-1) + 1, cu soluția T(n) = 2^n - 1\r\nPentru n=5: 2^5 - 1 = 31 mutări (numărul MINIM posibil). \r\n\r\nAceastă strategie exploatează perfect substructura optimă a problemei - \r\nfiecare subproblemă se rezolvă identic.  Nu avem nevoie de căutare \r\n(BFS/DFS) deoarece construim direct soluția optimă.",
+    "score": 96.0,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.92,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. ✓ Corect: 2^5-1 = 31"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:26:47",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Aleg Plain BFS pentru această problemă.\r\n\r\nBFS este optim deoarece explorează toate stările nivel cu nivel \r\nfolosind o coadă.  Pornind de la configurația inițială, expandăm \r\nfiecare stare posibilă până găsim starea finală. \r\n\r\nAvantajul BFS este că garantează găsirea căii celei mai scurte, \r\nexplorând exhaustiv spațiul de stări.  Pentru 5 discuri și 3 tije, \r\nspațiul este de 3^5 = 243 stări, perfect gestionabil.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "plain bfs (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": "plain bfs",
+      "message": "Ai ales 'plain bfs', dar răspunsul corect este 'recursive strategy (divide and conquer)'. EROARE: Descrierea ta corespunde strategiei 'plain bfs', nu 'recursive strategy (divide and conquer)'! (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:27:06",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Strategia optimă este Recursive Strategy (Divide and Conquer). \r\n\r\nAceastă abordare funcționează prin menținerea unei populații de \r\nconfigurații ale discurilor.  La fiecare generație, aplicăm operatori \r\nde crossover și mutație pentru a evolua către soluție. \r\n\r\nFuncția de fitness evaluează câte discuri sunt pe tija corectă.  \r\nSelectăm cromozomii cu fitness-ul cel mai mare și îi combinăm \r\npentru a genera offspring-ul. După suficiente generații, \r\nalgoritmul genetic convergează către soluția optimă de 31 mutări.\r\n\r\nDivide and Conquer împarte această populație în subpopulații \r\ncare evoluează în paralel.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "populatie",
+        "genetic",
+        "fitness",
+        "crossover",
+        "mutatie",
+        "generatii"
+      ],
+      "wrong_strategy_detected": "genetic algorithm",
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'genetic algorithm', nu 'recursive strategy (divide and conquer)'! Penalizare: concepte incompatibile detectate: populatie, genetic, fitness. (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:29:15",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Strategia optimă este Recursive Strategy (Divide and Conquer). \r\n\r\nAlgoritmul funcționează prin încălzirea sistemului la o temperatură \r\ninițială ridicată.   Discurile sunt mutate aleator, iar la fiecare pas \r\nacceptăm mutări care reduc energia totală a configurației.  \r\n\r\nPe măsură ce temperatura scade treptat (răcire), acceptăm din ce în \r\nce mai puține mutări proaste.   Când temperatura ajunge aproape de zero, \r\nsistemul se stabilizează în configurația optimă cu toate discurile \r\npe tija destinație.  Formula de acceptare Metropolis-Boltzmann \r\ncontrolează probabilitatea de a accepta o mutare.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "temperatura",
+        "racire",
+        "metropolis",
+        "boltzmann"
+      ],
+      "wrong_strategy_detected": "simulated annealing",
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'simulated annealing', nu 'recursive strategy (divide and conquer)'! Penalizare: concepte incompatibile detectate: temperatura, racire, metropolis. (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:29:26",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este alegerea corectă. \r\n\r\nProblema Turnurilor din Hanoi poate fi modelată ca un graf unde fiecare \r\nnod reprezintă o configurație.   Aplicăm AC-3 pentru a propaga \r\nconstrângerile și a reduce domeniile fiecărui disc.  \r\n\r\nMRV (Minimum Remaining Values) alege discul cu cele mai puține poziții \r\nvalide, iar Forward Checking elimină mutările invalide din domeniile \r\ncelorlalte discuri.  Densitatea grafului de stări este mică (sparse), \r\ndeci nu avem nevoie de propagare intensivă a constrângerilor.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (contradictory)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "ac-3",
+        "forward checking",
+        "mrv",
+        "minimum remaining",
+        "graf",
+        "nod"
+      ],
+      "wrong_strategy_detected": "backtracking with mrv + forward checking",
+      "message": "Răspuns incoerent (contradicție internă detectată). EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'recursive strategy (divide and conquer)'! Penalizare: concepte incompatibile detectate: ac-3, forward checking, mrv. (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:29:38",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Aleg Recursive Strategy (Divide and Conquer) pentru această problemă.\r\n\r\nAlgoritmul pornește cu o configurație aleatoare a discurilor și \r\niterativ mută discul cu cele mai multe conflicte în poziția cu \r\ncele mai puține conflicte.  Această căutare locală explorează \r\nvecinii stării curente și alege mutarea care minimizează \r\nnumărul total de conflicte. \r\n\r\nPrin swap-uri succesive între discuri și tije, algoritmul face \r\nhill climbing către soluția optimă.  Dacă ajungem într-un minim \r\nlocal, facem restart cu o nouă configurație aleatoare.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "conflicte",
+        "hill climbing",
+        "swap"
+      ],
+      "wrong_strategy_detected": "min-conflicts heuristic",
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'min-conflicts heuristic', nu 'recursive strategy (divide and conquer)'! Penalizare: concepte incompatibile detectate: conflicte, hill climbing, swap. (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:29:49",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Divide and Conquer (Recursive Strategy) este soluția optimă.\r\n\r\nLa fel ca în problema N-Queens, plasăm fiecare disc pe câte o tijă \r\nastfel încât să nu se atace diagonal.  Backtracking-ul sistematic \r\ngarantează găsirea soluției, iar euristica fail-first alege \r\ndiscul (regina) cu cele mai puține poziții valide rămase.\r\n\r\nPentru 5 discuri (regine), spațiul de căutare este gestionabil.   \r\nFiecare disc trebuie plasat astfel încât să nu fie atacat de \r\ndiscurile deja plasate pe celelalte tije.",
+    "score": 6.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "regina",
+        "regine",
+        "queens"
+      ],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: regina, regine, queens. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:30:22",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este cea mai bună alegere.\r\n\r\nImplementăm această strategie folosind o coadă pentru a explora \r\nnivel cu nivel toate configurațiile posibile.  La fiecare pas, \r\nexpandăm starea curentă generând toți succesorii (mutări posibile) \r\nși îi adăugăm în coadă. \r\n\r\nBreadth-First Search garantează că găsim calea cea mai scurtă \r\ncătre soluție.  Spațiul de stări de 3^5 = 243 configurații \r\neste explorat exhaustiv până găsim starea finală.  Complexitatea \r\neste O(b^d) unde b este branching factor-ul și d adâncimea.",
+    "score": 10.0,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": "plain bfs",
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'plain bfs', nu 'recursive strategy (divide and conquer)'! (Penalizare: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:38:58",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Strategia optimă este Recursive Strategy (Divide and Conquer). \r\n\r\nAlgoritmul funcționează prin încălzirea sistemului la o temperatură \r\ninițială ridicată.   Discurile sunt mutate aleator, iar la fiecare pas \r\nacceptăm mutări care reduc energia totală a configurației.  \r\n\r\nPe măsură ce temperatura scade treptat (răcire), acceptăm din ce în \r\nce mai puține mutări proaste.   Când temperatura ajunge aproape de zero, \r\nsistemul se stabilizează în configurația optimă cu toate discurile \r\npe tija destinație.  Formula de acceptare Metropolis-Boltzmann \r\ncontrolează probabilitatea de a accepta o mutare.",
+    "score": 10,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "temperatura",
+        "racire",
+        "metropolis",
+        "boltzmann"
+      ],
+      "wrong_strategy_detected": "simulated annealing",
+      "message": "Strategie corectă identificată. EROARE: Descrierea ta corespunde strategiei 'simulated annealing', nu 'recursive strategy (divide and conquer)'! (Penalizare severă: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:39:13",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este alegerea corectă. \r\n\r\nProblema Turnurilor din Hanoi poate fi modelată ca un graf unde fiecare \r\nnod reprezintă o configurație.   Aplicăm AC-3 pentru a propaga \r\nconstrângerile și a reduce domeniile fiecărui disc.  \r\n\r\nMRV (Minimum Remaining Values) alege discul cu cele mai puține poziții \r\nvalide, iar Forward Checking elimină mutările invalide din domeniile \r\ncelorlalte discuri.  Densitatea grafului de stări este mică (sparse), \r\ndeci nu avem nevoie de propagare intensivă a constrângerilor.",
+    "score": 10,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (contradictory)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "ac-3",
+        "forward checking",
+        "mrv",
+        "minimum remaining",
+        "graf",
+        "nod"
+      ],
+      "wrong_strategy_detected": "backtracking with mrv + forward checking",
+      "message": "Răspuns incoerent (contradicție internă detectată). EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'recursive strategy (divide and conquer)'! (Penalizare severă: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:39:31",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este alegerea corectă. \r\n\r\nProblema Turnurilor din Hanoi poate fi modelată ca un graf unde fiecare \r\nnod reprezintă o configurație.   Aplicăm AC-3 pentru a propaga \r\nconstrângerile și a reduce domeniile fiecărui disc.  \r\n\r\nMRV (Minimum Remaining Values) alege discul cu cele mai puține poziții \r\nvalide, iar Forward Checking elimină mutările invalide din domeniile \r\ncelorlalte discuri.  Densitatea grafului de stări este mică (sparse), \r\ndeci nu avem nevoie de propagare intensivă a constrângerilor.",
+    "score": 10,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (contradictory)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "ac-3",
+        "forward checking",
+        "mrv",
+        "minimum remaining",
+        "graf",
+        "nod"
+      ],
+      "wrong_strategy_detected": "backtracking with mrv + forward checking",
+      "message": "Răspuns incoerent (contradicție internă detectată). EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'recursive strategy (divide and conquer)'! (Penalizare severă: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:39:36",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Aleg Recursive Strategy (Divide and Conquer). \r\n\r\nPentru Turnurile din Hanoi cu 3 tije și 5 discuri, aceasta este \r\nsingura strategie optimă, demonstrată matematic. \r\n\r\nAlgoritmul funcționează recursiv:\r\n1. Mută primele 4 discuri de pe tija sursă pe tija auxiliară\r\n2. Mută discul cel mare (al 5-lea) pe tija destinație\r\n3.  Mută cele 4 discuri de pe tija auxiliară pe tija destinație\r\n\r\nFormula matematică: T(n) = 2×T(n-1) + 1, cu soluția T(n) = 2^n - 1\r\nPentru n=5: 2^5 - 1 = 31 mutări (numărul MINIM posibil). \r\n\r\nAceastă strategie exploatează perfect substructura optimă a problemei - \r\nfiecare subproblemă se rezolvă identic.  Nu avem nevoie de căutare \r\n(BFS/DFS) deoarece construim direct soluția optimă.",
+    "score": 96.0,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.92,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. ✓ Corect: 2^5-1 = 31"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:40:06",
+    "index": 0,
+    "question": "Pentru Turnurile din Hanoi (3 tije, 5 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 3,
+      "disks": 5
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este alegerea corectă. \r\n\r\nProblema Turnurilor din Hanoi poate fi modelată ca un graf unde fiecare \r\nnod reprezintă o configurație.   Aplicăm AC-3 pentru a propaga \r\nconstrângerile și a reduce domeniile fiecărui disc.  \r\n\r\nMRV (Minimum Remaining Values) alege discul cu cele mai puține poziții \r\nvalide, iar Forward Checking elimină mutările invalide din domeniile \r\ncelorlalte discuri.  Densitatea grafului de stări este mică (sparse), \r\ndeci nu avem nevoie de propagare intensivă a constrângerilor.",
+    "score": 10,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.0,
+      "detected_intent": "recursive strategy (divide and conquer) (contradictory)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [
+        "ac-3",
+        "forward checking",
+        "mrv",
+        "minimum remaining",
+        "graf",
+        "nod"
+      ],
+      "wrong_strategy_detected": "backtracking with mrv + forward checking",
+      "message": "Răspuns incoerent (contradicție internă detectată). EROARE: Descrierea ta corespunde strategiei 'backtracking with mrv + forward checking', nu 'recursive strategy (divide and conquer)'! (Penalizare severă: descriere de altă strategie)"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:42:49",
+    "index": 1,
+    "question": "Pentru Turnurile din Hanoi (4 tije, 10 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 4,
+      "disks": 10
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este cea mai bună alegere. \r\n\r\nE recursiv și optim.",
+    "score": 67.5,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.35,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:43:22",
+    "index": 1,
+    "question": "Pentru Turnurile din Hanoi (4 tije, 10 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 4,
+      "disks": 10
+    },
+    "user_answer": "Aleg Recursive Strategy (Divide and Conquer). \r\n\r\nProblema Turnurilor din Hanoi se rezolvă recursiv prin descompunerea \r\nîn subprobleme mai mici.  Pentru 10 discuri și 4 tije, mutăm discurile \r\nunul câte unul de pe tija sursă pe tija destinație.\r\n\r\nFormula este 2^10 - 1 = 1023 mutări, iar algoritmul recursiv \r\ngarantează această soluție optimă.  Fiecare disc este mutat \r\nindependent folosind recursivitatea.",
+    "score": 93.1,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.86,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată. ✓ Corect: 2^10-1 = 63"
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:43:49",
+    "index": 1,
+    "question": "Pentru Turnurile din Hanoi (4 tije, 10 discuri), ce strategie alegi? Explică de ce.",
+    "problem_type": "generalized hanoi",
+    "params": {
+      "pegs": 4,
+      "disks": 10
+    },
+    "user_answer": "Recursive Strategy (Divide and Conquer) este soluția optimă pentru \r\naceastă problemă. \r\n\r\nDivide and Conquer funcționează prin împărțirea problemei mari în \r\nprobleme mai mici care sunt mai ușor de rezolvat.  Rezolvăm fiecare \r\nsubproblemă și combinăm rezultatele pentru a obține soluția finală.\r\n\r\nAceastă abordare este eficientă și elegantă pentru Turnurile din Hanoi \r\ndeoarece problema are o structură care se pretează natural la \r\ndescompunere recursivă.",
+    "score": 75,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.54,
+      "detected_intent": "recursive strategy (divide and conquer) (positive)",
+      "truth_recalculated": "recursive strategy (divide and conquer)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Recursive Strategy (Divide And Conquer)"
+  },
+  {
+    "timestamp": "2025-12-03 22:52:07",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg Warnsdorff Heuristic (Greedy) pentru această problemă. \r\n\r\nPentru Knight's Tour pe o tablă 20x20 (400 căsuțe), euristica Warnsdorff \r\neste de departe cea mai eficientă alegere. \r\n\r\nRegula Warnsdorff: La fiecare pas, calul sare pe căsuța care are cele \r\nmai PUȚINE mutări disponibile (grad minim).  Intuiția: vizităm căsuțele \r\n\"dificile\" (colțuri, margini) cât timp avem flexibilitate.\r\n\r\nComplexitate:\r\n- Warnsdorff: O(n²) - vizităm fiecare căsuță o singură dată, max 8 verificări\r\n- BFS/DFS: O((n²)!) - ar explora (400)!  configurații (imposibil)\r\n- A*: Overhead inutil pentru o problemă cu soluție greedy garantată\r\n\r\nPentru n ≥ 5, Warnsdorff găsește ÎNTOTDEAUNA un tur complet, în timp \r\naproape liniar.  Pe o tablă 20x20, soluția e găsită în milisecunde.",
+    "score": 15.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "bfs",
+        "dfs",
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 110,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs, dfs, complet. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:52:45",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Warnsdorff Heuristic (Greedy) este strategia optimă. \r\n\r\nAceastă euristică funcționează alegând mereu mutarea către căsuța \r\ncu gradul cel mai mic (cele mai puține opțiuni de continuare).  \r\n\r\nAvantaje:\r\n1. Complexitate O(n²) - aproape liniară\r\n2. Găsește soluția garantat pentru table ≥ 5x5\r\n3. Nu necesită backtracking sau căutare exhaustivă\r\n\r\nBFS sau A* ar fi complet nepractice - spațiul de căutare pentru \r\no tablă 20x20 este astronomic (400!  permutări posibile).  \r\nWarnsdorff rezolvă problema în milisecunde.",
+    "score": 15.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "bfs",
+        "backtracking",
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 72,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs, backtracking, complet. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:52:58",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg A* pentru această problemă. \r\n\r\nA* este optim pentru găsirea căii celei mai scurte.  Folosim o \r\neuristică admisibilă (distanța Manhattan) pentru a ghida căutarea \r\ncătre soluție.  Funcția f(n) = g(n) + h(n) garantează optimalitatea.\r\n\r\nAlgoritmul explorează nodurile în ordinea costului estimat, \r\nexpandând mai întâi stările promițătoare.  Pentru o tablă 20x20, \r\nA* va găsi turul optim explorând eficient spațiul de stări.\r\n\r\nLista OPEN conține nodurile de expandat, iar CLOSED pe cele vizitate.",
+    "score": 37.9,
+    "components": {
+      "selection_score": 0.0,
+      "reasoning_score": 0.63,
+      "detected_intent": "None",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "word_count": 71,
+      "message": "Nu am identificat clar o strategie în răspunsul tău. (Argumentare bună dar strategie greșită)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:53:20",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Warnsdorff Heuristic (Greedy) este cel mai bun. \r\n\r\nE o euristică care funcționează bine pentru Knight's Tour.  Calul \r\nse mișcă pe tablă vizitând toate căsuțele.  Algoritmul alege mutări \r\nbune la fiecare pas. \r\n\r\nEste rapid și eficient pentru table mari ca 20x20.",
+    "score": 86.7,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.73,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "word_count": 40,
+      "message": "Strategie corectă identificată."
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:54:25",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg Warnsdorff Heuristic pentru aceasta problema.\r\n\r\nPentru Knight's Tour pe o tabla 20x20 cu 400 de casute, euristica \r\nWarnsdorff este cea mai eficienta alegere. \r\n\r\nRegula Warnsdorff spune ca la fiecare pas, calul trebuie sa sara \r\npe casuta care are cele mai putine mutari disponibile, adica gradul \r\ncel mai mic.  Intuitia din spatele acestei reguli este ca vizitam \r\ncasutele dificile precum colturi si margini cat timp avem flexibilitate \r\nsa ne miscam.\r\n\r\nDin punct de vedere al complexitatii, Warnsdorff functioneaza in timp \r\naproape liniar, vizitand fiecare casuta o singura data si verificand \r\nmaxim 8 mutari posibile. In schimb, BFS sau DFS ar explora un numar \r\nfactorial de configuratii, ceea ce este imposibil de calculat pentru \r\n400 de casute. \r\n\r\nPentru table de dimensiune cel putin 5x5, Warnsdorff gaseste intotdeauna \r\nun tur complet.  Pe o tabla 20x20, solutia este gasita in milisecunde.",
+    "score": 15.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "bfs",
+        "dfs",
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 138,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs, dfs, complet. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:54:37",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Warnsdorff Heuristic este strategia optima pentru Knight's Tour. \r\n\r\nAceasta euristica functioneaza alegand mereu mutarea catre casuta \r\ncu gradul cel mai mic, adica cea cu cele mai putine optiuni de \r\ncontinuare.  Prin aceasta abordare, casutele greu accesibile sunt \r\nvizitate devreme, cand inca avem libertate de miscare.\r\n\r\nPrincipalele avantaje sunt complexitatea aproape liniara si faptul \r\nca gaseste solutia garantat pentru table mai mari de 5x5.  Nu necesita \r\nbacktracking sau cautare exhaustiva. \r\n\r\nBFS sau A* ar fi complet nepractice deoarece spatiul de cautare pentru \r\no tabla 20x20 este astronomic. Warnsdorff rezolva problema in milisecunde \r\nfara sa exploreze tot spatiul de stari.",
+    "score": 15.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "bfs",
+        "backtracking",
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 98,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs, backtracking, complet. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 22:55:01",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg Warnsdorff Heuristic pentru aceasta problema.\r\n\r\nPentru Knight's Tour pe o tabla 20x20 cu 400 de casute, euristica \r\nWarnsdorff este cea mai eficienta alegere. \r\n\r\nRegula Warnsdorff spune ca la fiecare pas, calul trebuie sa sara \r\npe casuta care are cele mai putine mutari disponibile, adica gradul \r\ncel mai mic.  Intuitia din spatele acestei reguli este ca vizitam \r\ncasutele dificile precum colturi si margini cat timp avem flexibilitate \r\nsa ne miscam.\r\n\r\nDin punct de vedere al complexitatii, Warnsdorff functioneaza in timp \r\naproape liniar, vizitand fiecare casuta o singura data si verificand \r\nmaxim 8 mutari posibile. In schimb, BFS sau DFS ar explora un numar \r\nfactorial de configuratii, ceea ce este imposibil de calculat pentru \r\n400 de casute. \r\n\r\nPentru table de dimensiune cel putin 5x5, Warnsdorff gaseste intotdeauna \r\nun tur complet.  Pe o tabla 20x20, solutia este gasita in milisecunde.",
+    "score": 15.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "bfs",
+        "dfs",
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 138,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: bfs, dfs, complet. (Penalizare: 3 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 23:00:00",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg Warnsdorff Heuristic pentru aceasta problema.\r\n\r\nPentru Knight's Tour pe o tabla 20x20 cu 400 de casute, euristica \r\nWarnsdorff este cea mai eficienta alegere. \r\n\r\nRegula Warnsdorff spune ca la fiecare pas, calul trebuie sa sara \r\npe casuta care are cele mai putine mutari disponibile, adica gradul \r\ncel mai mic.  Intuitia din spatele acestei reguli este ca vizitam \r\ncasutele dificile precum colturi si margini cat timp avem flexibilitate \r\nsa ne miscam.\r\n\r\nDin punct de vedere al complexitatii, Warnsdorff functioneaza in timp \r\naproape liniar, vizitand fiecare casuta o singura data si verificand \r\nmaxim 8 mutari posibile. In schimb, BFS sau DFS ar explora un numar \r\nfactorial de configuratii, ceea ce este imposibil de calculat pentru \r\n400 de casute. \r\n\r\nPentru table de dimensiune cel putin 5x5, Warnsdorff gaseste intotdeauna \r\nun tur complet.  Pe o tabla 20x20, solutia este gasita in milisecunde.",
+    "score": 19.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 138,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: complet. (Penalizare: 1 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 23:00:24",
+    "index": 1,
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "knight's tour",
+    "params": {
+      "n": 20
+    },
+    "user_answer": "Aleg Warnsdorff Heuristic pentru aceasta problema.\r\n\r\nPentru Knight's Tour pe o tabla 20x20 cu 400 de casute, euristica \r\nWarnsdorff este cea mai eficienta alegere. \r\n\r\nRegula Warnsdorff spune ca la fiecare pas, calul trebuie sa sara \r\npe casuta care are cele mai putine mutari disponibile, adica gradul \r\ncel mai mic.  Intuitia din spatele acestei reguli este ca vizitam \r\ncasutele dificile precum colturi si margini cat timp avem flexibilitate \r\nsa ne miscam.\r\n\r\nDin punct de vedere al complexitatii, Warnsdorff functioneaza in timp \r\naproape liniar, vizitand fiecare casuta o singura data si verificand \r\nmaxim 8 mutari posibile. In schimb, BFS sau DFS ar explora un numar \r\nfactorial de configuratii, ceea ce este imposibil de calculat pentru \r\n400 de casute. \r\n\r\nPentru table de dimensiune cel putin 5x5, Warnsdorff gaseste intotdeauna \r\nun tur complet.  Pe o tabla 20x20, solutia este gasita in milisecunde.",
+    "score": 19.5,
+    "components": {
+      "selection_score": 0.3,
+      "reasoning_score": 0.1,
+      "detected_intent": "warnsdorff heuristic (greedy) (positive)",
+      "truth_recalculated": "warnsdorff heuristic (greedy)",
+      "violations_detected": [
+        "complet"
+      ],
+      "wrong_strategy_detected": null,
+      "word_count": 138,
+      "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: complet. (Penalizare: 1 concepte incompatibile)"
+    },
+    "calculated_truth": "Warnsdorff Heuristic (Greedy)"
   }
 ]
