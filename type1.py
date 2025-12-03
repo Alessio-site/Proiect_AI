@@ -252,8 +252,10 @@ def _normalize_strategy_name(strategy: str) -> str:
             return canonical
         for alias in aliases:
             alias_norm = _normalize(alias)
-            if strategy_norm == alias_norm or alias_norm in strategy_norm or strategy_norm in alias_norm:
-                return canonical
+            # Require minimum length of 3 to avoid false positives
+            if len(alias_norm) >= 3:
+                if strategy_norm == alias_norm or alias_norm in strategy_norm:
+                    return canonical
     
     return strategy
 
@@ -279,16 +281,17 @@ def _strategies_match(user_strategy: str, correct_strategy: str) -> Tuple[bool, 
     if _normalize(user_canonical) == _normalize(correct_canonical):
         return True, 0.95
     
-    # Potrivire parțială (substring)
+    # Potrivire parțială (substring) - require minimum length to avoid false positives
     if len(user_norm) >= 8 and len(correct_norm) >= 8:
         if user_norm in correct_norm or correct_norm in user_norm:
             return True, 0.85
     
-    # Verificăm aliasurile pentru ambele
+    # Verificăm aliasurile pentru strategia corectă
     if correct_strategy in STRATEGY_ALIASES:
         for alias in STRATEGY_ALIASES[correct_strategy]:
             alias_norm = _normalize(alias)
-            if user_norm == alias_norm or alias_norm in user_norm or user_norm in alias_norm:
+            # Require minimum length of 3 and exact or containing match
+            if len(alias_norm) >= 3 and (user_norm == alias_norm or alias_norm in user_norm):
                 return True, 0.9
     
     return False, 0.0
@@ -973,7 +976,7 @@ class SmartEvaluator:
         (r"mrv\s+forward\s*checking", "backtracking with mrv + forward checking"),
         (r"mrv\s+(?:si|și|and|cu)\s+fc", "backtracking with mrv + forward checking"),
         (r"\bmrv\s+fc\b", "backtracking with mrv + forward checking"),  # mrv fc (after + removed)
-        (r"\bmrv\b", "backtracking with mrv + forward checking"),  # just mrv alone
+        # Note: removed too-broad \bmrv\b pattern to avoid false positives
         
         # Recursive/Divide and Conquer
         (r"recursive\s+strategy\s*\(?\s*divide\s+(?:and|et|si|și)\s+conquer\s*\)?", "recursive strategy (divide and conquer)"),
@@ -1986,7 +1989,8 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
                 "semantic_score": analysis_details.get("semantic", 0.0) * 100,
                 "logic_score": analysis_details.get("logic", 0.0) * 100,
                 "depth_score": analysis_details.get("depth", 0.0) * 100,
-                "has_causality": analysis_details.get("logic_features", {}).get("has_reasoning", False),
+                "has_causality": analysis_details.get("logic_features", {}).get("has_causality", False),
+                "has_reasoning": analysis_details.get("logic_features", {}).get("has_reasoning", False),
                 "mentions_complexity": analysis_details.get("depth_features", {}).get("mentions_complexity", False),
                 "explains_why": analysis_details.get("depth_features", {}).get("explains_why", False),
             },
