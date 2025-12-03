@@ -876,7 +876,7 @@ class SmartEvaluator:
         (r"consistenta\s+(?:de\s+)?arc", "ac-3 with backtracking"),
         
         # Min-conflicts
-        (r"min-? conflicts? ", "min-conflicts heuristic"),
+        (r"min-?conflicts?\b", "min-conflicts heuristic"),
         (r"conflicte\s+minime", "min-conflicts heuristic"),
         (r"minimizarea?\s+conflictelor", "min-conflicts heuristic"),
         
@@ -1205,87 +1205,85 @@ class SmartEvaluator:
             if described_norm != correct_norm and correct_norm not in described_norm and described_norm not in correct_norm:
                 wrong_strategy_detected = described_strategy
         
-            # 2. VERIFICARE CONCEPTE INTERZISE (cu detectare context)
-            violations = []
-            for bad in forbidden_concepts:
-                bad_norm = _normalize(bad)
-                if len(bad_norm) < 3:
-                    continue
-                
-                # Verificăm dacă conceptul apare în text
-                if bad_norm not in text_norm:
-                    continue
-                
-                # GĂSIT - acum verificăm CONTEXTUL
-                # Pattern pentru a extrage textul din jurul conceptului
-                escaped_bad = re. escape(bad_norm)
-                pattern = rf"(.{{0,80}})\b{escaped_bad}\b(.{{0,50}})"
-                match = re.search(pattern, text_norm)
-                
-                if not match:
-                    # Încearcă fără word boundaries pentru concepte compuse
-                    pattern = rf"(.{{0,80}}){escaped_bad}(.{{0,50}})"
-                    match = re.search(pattern, text_norm)
-                
-                if match:
-                    left_context = match.group(1)
-                    right_context = match.group(2)
-                    full_context = left_context + bad_norm + right_context
-                    
-                    # Lista de indicatori că conceptul e CRITICAT sau COMPARAT negativ
-                    negative_patterns = [
-                        # Negații
-                        r"nu\s+(?:\w+\s+){0,3}" + escaped_bad,
-                        r"nici\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        r"fara\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        r"evit\w*\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        # Critici în context stâng
-                        r"(?:ar\s+fi|e|este|sunt)\s+(?:imposibil|ineficient|lent|prea|gresit)",
-                        r"nu\s+(?:necesita|folosim|avem|e|este)",
-                        r"(?:imposibil|ineficient|nepractice? )\s+(?:pentru|de|sa)",
-                        # Comparații
-                        r"(?:in\s+schimb|spre\s+deosebire|fata\s+de|comparativ)",
-                        r"(?:in\s+loc\s+de|vs|versus)",
-                    ]
-                    
-                    # Indicatori simpli în context
-                    negative_words_left = [
-                        "nu ", "nici ", "fara ", "evita", "imposibil", "ineficient",
-                        "nepracti", "ar explora", "ar fi ", "in schimb", "spre deosebire",
-                        "nu necesita", "nu folosim", "nu avem nevoie", "nu e nevoie"
-                    ]
-                    
-                    negative_words_right = [
-                        "ar fi imposibil", "ar fi ineficient", "ar fi lent",
-                        "e imposibil", "imposibil de", "ar explora",
-                        "nepracti", "ineficient"
-                    ]
-                    
-                    is_safe = False
-                    
-                    # Verificăm context stâng
-                    for neg in negative_words_left:
-                        if neg in left_context:
-                            is_safe = True
-                            break
-                    
-                    # Verificăm context drept
-                    if not is_safe:
-                        for neg in negative_words_right:
-                            if neg in right_context:
-                                is_safe = True
-                                break
-                    
-                    # Verificăm pattern-uri regex
-                    if not is_safe:
-                        for pattern in negative_patterns:
-                            if re.search(pattern, full_context):
-                                is_safe = True
-                                break
-                    
-                    # Dacă NU e în context negativ, adăugăm la violări
-                    if not is_safe:
-                        violations.append(bad)
+        # 2. VERIFICARE CONCEPTE INTERZISE (cu detectare context)
+        violations = []
+        for bad in forbidden_concepts:
+            bad_norm = _normalize(bad)
+            if len(bad_norm) < 3:
+                continue
+            
+            # Verificăm dacă conceptul apare în text ca CUVÂNT ÎNTREG
+            escaped_bad = re.escape(bad_norm)
+            # Prima încercare: cu word boundaries (pentru cuvinte simple)
+            pattern_wb = rf"(.{{0,80}})\b{escaped_bad}\b(.{{0,50}})"
+            match = re.search(pattern_wb, text_norm)
+            
+            # Dacă nu găsim cu word boundaries, încercăm fără (pentru concepte compuse cu cratimă)
+            if not match and ('-' in bad_norm or ' ' in bad_norm):
+                pattern_no_wb = rf"(.{{0,80}}){escaped_bad}(.{{0,50}})"
+                match = re.search(pattern_no_wb, text_norm)
+            
+            if not match:
+                continue  # Conceptul nu apare în text ca cuvânt întreg
+            
+            left_context = match.group(1)
+            right_context = match.group(2)
+            full_context = left_context + bad_norm + right_context
+            
+            # Lista de indicatori că conceptul e CRITICAT sau COMPARAT negativ
+            negative_patterns = [
+                # Negații
+                r"nu\s+(?:\w+\s+){0,3}" + escaped_bad,
+                r"nici\s+(?:\w+\s+){0,2}" + escaped_bad,
+                r"fara\s+(?:\w+\s+){0,2}" + escaped_bad,
+                r"evit\w*\s+(?:\w+\s+){0,2}" + escaped_bad,
+                # Critici în context stâng
+                r"(?:ar\s+fi|e|este|sunt)\s+(?:imposibil|ineficient|lent|prea|gresit)",
+                r"nu\s+(?:necesita|folosim|avem|e|este)",
+                r"(?:imposibil|ineficient|nepractice?)\s+(?:pentru|de|sa)",
+                # Comparații
+                r"(?:in\s+schimb|spre\s+deosebire|fata\s+de|comparativ)",
+                r"(?:in\s+loc\s+de|vs|versus)",
+            ]
+            
+            # Indicatori simpli în context
+            negative_words_left = [
+                "nu ", "nici ", "fara ", "evita", "imposibil", "ineficient",
+                "nepracti", "ar explora", "ar fi ", "in schimb", "spre deosebire",
+                "nu necesita", "nu folosim", "nu avem nevoie", "nu e nevoie"
+            ]
+            
+            negative_words_right = [
+                "ar fi imposibil", "ar fi ineficient", "ar fi lent",
+                "e imposibil", "imposibil de", "ar explora",
+                "nepracti", "ineficient"
+            ]
+            
+            is_safe = False
+            
+            # Verificăm context stâng
+            for neg in negative_words_left:
+                if neg in left_context:
+                    is_safe = True
+                    break
+            
+            # Verificăm context drept
+            if not is_safe:
+                for neg in negative_words_right:
+                    if neg in right_context:
+                        is_safe = True
+                        break
+            
+            # Verificăm pattern-uri regex
+            if not is_safe:
+                for pattern in negative_patterns:
+                    if re.search(pattern, full_context):
+                        is_safe = True
+                        break
+            
+            # Dacă NU e în context negativ, adăugăm la violări
+            if not is_safe:
+                violations.append(bad)
 
         # Dacă avem violări grave sau strategie greșită detectată
         if violations or wrong_strategy_detected:
