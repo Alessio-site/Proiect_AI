@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <div class="q-meta">Întrebarea {{ idx+1 }} / {{ total }}</div>
+  <h2>Întrebare</h2>
+  <p class="q-text">{{ question }}</p>
+
+  {% if options %}
+  <details class="helper">
+    <summary>Vezi lista de strategii posibile (hint)</summary>
+    <ul>
+      {% for o in options %}
+        <li>{{ o }}</li>
+      {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('evaluate') }}">
+    <input type="hidden" name="idx" value="{{ idx }}">
+    <label for="answer">Răspunsul tău (scurt, dar argumentat):</label>
+    <textarea id="answer" name="answer" rows="6" placeholder="Ex.: 'Min-conflicts heuristic; pentru N mare reduce rapid conflictele...'"></textarea>
+    <div class="actions">
+      <a class="btn secondary" href="{{ url_for('questions') }}">Înapoi la listă</a>
+      <button class="btn" type="submit">Evaluează</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <div class="q-meta">Întrebarea {{ idx+1 }} / {{ total }}</div>
+  <h2>Rezultat evaluare</h2>
+
+  <div class="score">
+    <div class="score-main">{{ score.score }}%</div>
+    <div class="score-sub">
+      <div style="font-weight: bold; margin-bottom: 5px;">Scor Corectitudine</div>
+      <div style="font-size: 0.9em; opacity: 0.8;">
+        <div>Selecție strategie: <strong>{{ score.components.selection_score }}</strong></div>
+        <div>Argumentare: <strong>{{ score.components.reasoning_score }}</strong></div>
+        <div class="detected">Detectat: <em>{{ score.components.detected_intent }}</em></div>
+      </div>
+    </div>
+  </div>
+
+  {% if score.components.message %}
+  <p class="feedback-msg"><strong>Feedback:</strong> {{ score.components.message }}</p>
+  {% endif %}
+
+  <p><strong>Răspunsul tău:</strong></p>
+  <pre class="answer">{{ user_text }}</pre>
+
+  {% if system_response %}
+  <div class="system-answer card" style="margin-top: 20px; border: 1px solid #22c55e; background-color: #064e3b;">
+      <h3 style="margin-top: 0; color: #4ade80;">Răspunsul Generat de Aplicație</h3>
+      <p><strong>Răspuns Punctual:</strong> {{ system_response.punctual }}</p>
+      <details>
+          <summary style="cursor: pointer; color: #4ade80;">Vezi Răspunsul Detaliat (Explicații)</summary>
+          <pre style="white-space: pre-wrap; background: #022c22; padding: 10px; border-radius: 5px; margin-top: 10px; color: #ecfdf5;">{{ system_response.detailed }}</pre>
+      </details>
+  </div>
+  {% elif reveal %}
+  <details class="helper">
+    <summary>Arată răspunsul canonic</summary>
+    <p><strong>Strategie corectă:</strong> {{ reveal.correct_answer }}</p>
+    <p><strong>De ce:</strong> {{ reveal.explanation }}</p>
+  </details>
+  {% endif %}
+
+  <div class="actions">
+    <a class="btn secondary" href="{{ url_for('questions') }}">Înapoi la listă</a>
+    {% if prev_idx is not none %}
+      <a class="btn secondary" href="{{ url_for('question', idx=prev_idx) }}">◀ Înapoi</a>
+    {% endif %}
+    {% if next_idx is not none %}
+      <a class="btn" href="{{ url_for('question', idx=next_idx) }}">Înainte ▶</a>
+    {% else %}
+      <a class="btn" href="{{ url_for('questions') }}">Finalizează</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,79 @@
+[
+  {
+    "index": 0,
+    "type": "search_strategy_selection",
+    "problem_type": "n-queens",
+    "question": "Având problema N-Queens cu N=8, ce strategie de căutare este cea mai potrivită? Argumentează.",
+    "params": {
+      "N": 8
+    },
+    "options": [
+      "plain dfs",
+      "genetic algorithm",
+      "backtracking with MRV + forward checking",
+      "a*"
+    ]
+  },
+  {
+    "index": 1,
+    "type": "search_strategy_selection",
+    "problem_type": "knight's tour",
+    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motiv.",
+    "params": {
+      "n": 20
+    },
+    "options": [
+      "simulated annealing",
+      "warnsdorff heuristic (greedy)",
+      "plain dfs",
+      "plain bfs"
+    ]
+  },
+  {
+    "index": 2,
+    "type": "search_strategy_selection",
+    "problem_type": "knight's tour",
+    "question": "Pentru Knight's Tour pe o tablă 8x8, ce strategie funcționează cel mai eficient? Motiv.",
+    "params": {
+      "n": 8
+    },
+    "options": [
+      "simulated annealing",
+      "warnsdorff heuristic (greedy)",
+      "plain bfs",
+      "plain dfs"
+    ]
+  },
+  {
+    "index": 3,
+    "type": "search_strategy_selection",
+    "problem_type": "generalized hanoi",
+    "question": "Pentru Turnurile din Hanoi (3 tije, 6 discuri), ce strategie alegi? Explica de ce.",
+    "params": {
+      "pegs": 3,
+      "disks": 6
+    },
+    "options": [
+      "dynamic programming",
+      "plain bfs",
+      "plain dfs",
+      "recursive strategy (divide and conquer)"
+    ]
+  },
+  {
+    "index": 4,
+    "type": "search_strategy_selection",
+    "problem_type": "generalized hanoi",
+    "question": "Pentru Turnurile din Hanoi (3 tije, 15 discuri), ce strategie alegi? Explica de ce.",
+    "params": {
+      "pegs": 3,
+      "disks": 15
+    },
+    "options": [
+      "ida*",
+      "plain dfs",
+      "recursive strategy (divide and conquer)",
+      "min-conflicts heuristic"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Întrebări generate</h2>
+  {% if not items %}
+    <p>Nu există întrebări. <a href="{{ url_for('home') }}">Generează</a> mai întâi.</p>
+  {% else %}
+    <ol class="q-list">
+      {% for it in items %}
+        <li>
+          <div class="q-item">
+            <div class="q-type">{{ it.problem_type }}</div>
+            <div class="q-text">{{ it.question }}</div>
+            <a class="btn" href="{{ url_for('question', idx=it.index) }}">Răspunde</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+</section>
+{% endblock %}

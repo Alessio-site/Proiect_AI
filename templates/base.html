@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <title>SmarTest – Tipul 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>SmarTest · Tipul 1 (Strategia potrivită)</h1>
+  <nav>
+    <a href="{{ url_for('home') }}">Start</a>
+    <a href="{{ url_for('questions') }}">Întrebări</a>
+  </nav>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  <small>UI demo • Flask + Jinja2</small>
+</footer>
+</body>
+</html>
