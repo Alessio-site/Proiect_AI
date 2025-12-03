@@ -7323,5 +7323,27 @@
       "message": "Strategie corectă identificată. Penalizare: concepte incompatibile detectate: complet. (Penalizare: 1 concepte incompatibile)"
     },
     "calculated_truth": "Warnsdorff Heuristic (Greedy)"
+  },
+  {
+    "timestamp": "2025-12-03 21:39:37",
+    "index": 0,
+    "question": "Având problema N-Queens cu N=4, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "problem_type": "n-queens",
+    "params": {
+      "N": 4
+    },
+    "user_answer": "Backtracking cu MRV și Forward Checking este optimal pentru probleme mici.",
+    "score": 27.9,
+    "components": {
+      "selection_score": 1.0,
+      "reasoning_score": 0.39,
+      "detected_intent": "backtracking with mrv + forward checking (positive)",
+      "truth_recalculated": "backtracking with mrv + forward checking",
+      "violations_detected": [],
+      "wrong_strategy_detected": null,
+      "word_count": 11,
+      "message": "Strategie corectă identificată. (Răspuns foarte scurt: 11 cuvinte - argumentare insuficientă)"
+    },
+    "calculated_truth": "Backtracking With Mrv + Forward Checking"
   }
 ]

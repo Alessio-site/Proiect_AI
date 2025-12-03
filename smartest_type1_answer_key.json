@@ -8,70 +8,40 @@
       "N": 4
     },
     "options": [
-      "hill climbing with sideways moves",
-      "min-conflicts heuristic",
-      "simulated annealing",
-      "backtracking with mrv + forward checking"
+      "genetic algorithm",
+      "backtracking with mrv + forward checking",
+      "plain dfs",
+      "hill climbing with sideways moves"
     ]
   },
   {
     "index": 1,
     "type": "search_strategy_selection",
-    "problem_type": "knight's tour",
-    "question": "Pentru Knight's Tour pe o tablă 20x20, ce strategie funcționează cel mai eficient? Motivează.",
+    "problem_type": "n-queens",
+    "question": "Având problema N-Queens cu N=4, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
     "params": {
-      "n": 20
+      "N": 4
     },
     "options": [
-      "warnsdorff heuristic (greedy)",
+      "genetic algorithm",
+      "plain dfs",
       "simulated annealing",
-      "plain bfs",
-      "a*"
+      "backtracking with mrv + forward checking"
     ]
   },
   {
     "index": 2,
     "type": "search_strategy_selection",
-    "problem_type": "knight's tour",
-    "question": "Pentru Knight's Tour pe o tablă 12x12, ce strategie funcționează cel mai eficient? Motivează.",
-    "params": {
-      "n": 12
-    },
-    "options": [
-      "a*",
-      "warnsdorff heuristic (greedy)",
-      "backtracking with mrv + forward checking",
-      "hill climbing with sideways moves"
-    ]
-  },
-  {
-    "index": 3,
-    "type": "search_strategy_selection",
     "problem_type": "n-queens",
-    "question": "Având problema N-Queens cu N=6, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
+    "question": "Având problema N-Queens cu N=200, ce strategie de căutare este cea mai potrivită?  Argumentează alegerea.",
     "params": {
-      "N": 6
+      "N": 200
     },
     "options": [
-      "plain dfs",
       "min-conflicts heuristic",
-      "backtracking with mrv + forward checking",
-      "genetic algorithm"
-    ]
-  },
-  {
-    "index": 4,
-    "type": "search_strategy_selection",
-    "problem_type": "knight's tour",
-    "question": "Pentru Knight's Tour pe o tablă 12x12, ce strategie funcționează cel mai eficient? Motivează.",
-    "params": {
-      "n": 12
-    },
-    "options": [
-      "backtracking with mrv + forward checking",
+      "ac-3 with backtracking",
       "plain bfs",
-      "a*",
-      "warnsdorff heuristic (greedy)"
+      "backtracking with mrv + forward checking"
     ]
   }
 ]
