@@ -13,16 +13,16 @@ from difflib import SequenceMatcher
 
 # 1. SpaCy pentru analiză sintactică rapidă și negații
 try:
-    nlp = spacy. load("ro_core_news_lg")
+    nlp = spacy.load("ro_core_news_lg")
 except OSError:
     print("Modelul 'ro_core_news_lg' nu este instalat. Se încearcă 'ro_core_news_sm'...")
     try:
         nlp = spacy.load("ro_core_news_sm")
     except Exception:
-        print("Eroare critică: Niciun model spaCy de română găsit.  Evaluarea va fi limitată.")
+        print("Eroare critică: Niciun model spaCy de română găsit. Evaluarea va fi limitată.")
         nlp = None
 
-# 2.  Sentence Transformers pentru evaluare semantică (LOCAL, fără API)
+# 2. Sentence Transformers pentru evaluare semantică (LOCAL, fără API)
 semantic_model = None
 try:
     from sentence_transformers import SentenceTransformer, util
