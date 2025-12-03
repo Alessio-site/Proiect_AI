@@ -179,6 +179,120 @@ ALL_STRATEGIES = [
     "hill climbing with sideways moves"
 ]
 
+# Aliasuri pentru strategii - permite recunoașterea variațiilor de nume
+STRATEGY_ALIASES = {
+    "backtracking with mrv + forward checking": [
+        "backtracking mrv fc", "backtracking cu mrv", "mrv fc", "mrv forward checking",
+        "backtracking mrv forward checking", "bt mrv fc", "backtracking cu forward checking",
+        "mrv si forward checking", "mrv + fc", "backtracking optimizat",
+        "backtracking with mrv and forward checking", "bt with mrv + fc"
+    ],
+    "ac-3 with backtracking": [
+        "ac3 backtracking", "ac-3 backtracking", "arc consistency backtracking",
+        "consistenta arc", "ac3", "arc consistency", "backtracking ac3",
+        "backtracking with ac3", "backtracking cu ac-3"
+    ],
+    "min-conflicts heuristic": [
+        "min conflicts", "conflicte minime", "minimizare conflicte",
+        "min-conflicts", "minconflicts", "euristica conflicte",
+        "local search conflicte"
+    ],
+    "warnsdorff heuristic (greedy)": [
+        "warnsdorff", "euristica warnsdorff", "warnsdorff greedy",
+        "warnsdorff euristic", "greedy knight", "warnsdorf"
+    ],
+    "recursive strategy (divide and conquer)": [
+        "recursiv", "divide and conquer", "divide et conquer",
+        "divide si conquer", "strategia recursiva", "frame stewart",
+        "frame-stewart", "abordare recursiva"
+    ],
+    "simulated annealing": [
+        "calire simulata", "annealing", "simulated annealing",
+        "racire simulata", "cooling simulat"
+    ],
+    "genetic algorithm": [
+        "algoritm genetic", "genetic", "genetic alg", "ag",
+        "algoritm evolutiv", "evolutionar"
+    ],
+    "plain dfs": [
+        "dfs", "depth first", "cautare in adancime", "adancime",
+        "depth first search"
+    ],
+    "plain bfs": [
+        "bfs", "breadth first", "cautare in latime", "latime",
+        "breadth first search"
+    ],
+    "hill climbing with sideways moves": [
+        "hill climbing", "catarare", "escalada",
+        "hill climbing sideway", "cautare locala"
+    ],
+    "a*": [
+        "a star", "astar", "a-star"
+    ],
+    "ida*": [
+        "ida star", "idastar", "ida-star", "iterative deepening a"
+    ],
+    "dynamic programming": [
+        "programare dinamica", "dp", "dynamic prog"
+    ],
+    "greedy coloring": [
+        "colorare greedy", "greedy color", "colorare lacom"
+    ]
+}
+
+
+def _normalize_strategy_name(strategy: str) -> str:
+    """Normalizează numele strategiei la forma canonică."""
+    strategy_norm = _normalize(strategy)
+    
+    # Căutăm în aliasuri
+    for canonical, aliases in STRATEGY_ALIASES.items():
+        canonical_norm = _normalize(canonical)
+        if strategy_norm == canonical_norm:
+            return canonical
+        for alias in aliases:
+            alias_norm = _normalize(alias)
+            if strategy_norm == alias_norm or alias_norm in strategy_norm or strategy_norm in alias_norm:
+                return canonical
+    
+    return strategy
+
+
+def _strategies_match(user_strategy: str, correct_strategy: str) -> Tuple[bool, float]:
+    """
+    Verifică dacă strategia utilizatorului coincide cu cea corectă.
+    
+    Returns:
+        Tuple: (is_match, confidence_score)
+    """
+    user_norm = _normalize(user_strategy)
+    correct_norm = _normalize(correct_strategy)
+    
+    # Potrivire exactă
+    if user_norm == correct_norm:
+        return True, 1.0
+    
+    # Potrivire prin aliasuri
+    user_canonical = _normalize_strategy_name(user_strategy)
+    correct_canonical = _normalize_strategy_name(correct_strategy)
+    
+    if _normalize(user_canonical) == _normalize(correct_canonical):
+        return True, 0.95
+    
+    # Potrivire parțială (substring)
+    if len(user_norm) >= 8 and len(correct_norm) >= 8:
+        if user_norm in correct_norm or correct_norm in user_norm:
+            return True, 0.85
+    
+    # Verificăm aliasurile pentru ambele
+    if correct_strategy in STRATEGY_ALIASES:
+        for alias in STRATEGY_ALIASES[correct_strategy]:
+            alias_norm = _normalize(alias)
+            if user_norm == alias_norm or alias_norm in user_norm or user_norm in alias_norm:
+                return True, 0.9
+    
+    return False, 0.0
+
 
 def _detect_strategy_from_description(text: str) -> Optional[str]:
     """Detectează strategia descrisă în text bazat pe semnături."""
@@ -187,7 +301,7 @@ def _detect_strategy_from_description(text: str) -> Optional[str]:
     for strategy, patterns in STRATEGY_SIGNATURES.items():
         score = 0
         for pattern in patterns:
-            if re. search(pattern, text_norm):
+            if re.search(pattern, text_norm):
                 score += 1
         if score > 0:
             scores[strategy] = score
@@ -197,6 +311,7 @@ def _detect_strategy_from_description(text: str) -> Optional[str]:
     if scores[best] >= 2:
         return best
     return None
+
 
 
 # =======================================================================
@@ -452,7 +567,7 @@ class StrategySolver:
         less_plausible = []
         
         if problem_type == "n-queens":
-            metrics = StrategySolver._calculate_nqueens_metrics(params. get("N", 8))
+            metrics = StrategySolver._calculate_nqueens_metrics(params.get("N", 8))
             
             if metrics["bt_feasible"]:
                 # Backtracking e optim -> distractori sunt metodele locale (par mai rapide)
@@ -501,7 +616,7 @@ class StrategySolver:
             d_norm = _normalize(d)
             if d_norm not in seen and d_norm != correct_norm:
                 seen.add(d_norm)
-                unique_distractors. append(d)
+                unique_distractors.append(d)
         
         # Selectăm count distractori, prioritizând pe cei plauzibili
         if len(unique_distractors) > count:
@@ -543,7 +658,7 @@ class StrategySolver:
         # N-QUEENS
         # ============================================================
         if problem_type == "n-queens":
-            N = int(params. get("N", 8))
+            N = int(params.get("N", 8))
             metrics = StrategySolver._calculate_nqueens_metrics(N)
             truth["calculations"] = metrics
             
@@ -640,7 +755,7 @@ class StrategySolver:
         # GENERALIZED HANOI
         # ============================================================
         elif problem_type == "generalized hanoi":
-            pegs = int(params. get("pegs", 3))
+            pegs = int(params.get("pegs", 3))
             disks = int(params.get("disks", 5))
             metrics = StrategySolver._calculate_hanoi_metrics(pegs, disks)
             truth["calculations"] = metrics
@@ -711,9 +826,9 @@ class StrategySolver:
         # GRAPH COLORING
         # ============================================================
         elif problem_type == "graph coloring":
-            V = int(params. get("V", 10))
-            E = int(params. get("E", 10))
-            k = int(params. get("k", 3))
+            V = int(params.get("V", 10))
+            E = int(params.get("E", 10))
+            k = int(params.get("k", 3))
             metrics = StrategySolver._calculate_graph_coloring_metrics(V, E, k)
             truth["calculations"] = metrics
 
@@ -777,7 +892,7 @@ class StrategySolver:
         # KNIGHT'S TOUR
         # ============================================================
         elif problem_type == "knight's tour":
-            n = int(params. get("n", 8))
+            n = int(params.get("n", 8))
             metrics = StrategySolver._calculate_knights_tour_metrics(n)
             truth["calculations"] = metrics
             
@@ -820,7 +935,7 @@ class StrategySolver:
         solution = StrategySolver.solve(problem_type, params)
         strategy = solution["best_strategy"]
         reasoning = solution["reasoning_summary"]
-        calculations = solution. get("calculations", {})
+        calculations = solution.get("calculations", {})
         
         # Răspuns punctual (scurt)
         punctual = strategy.title() if strategy else "Necunoscut"
@@ -852,31 +967,32 @@ class SmartEvaluator:
     
     # Pattern-uri Regex pentru identificarea strategiilor
     STRATEGY_PATTERNS = [
-        # Backtracking variants
-        (r"backtracking\s+(?:with\s+)? mrv\s*\+?\s*forward\s*checking", "backtracking with mrv + forward checking"),
+        # Backtracking variants - note: + is removed in normalization, so we use \s+ instead
+        (r"backtracking\s+(?:with\s+)?mrv\s+forward\s*checking", "backtracking with mrv + forward checking"),
         (r"backtracking\s+(?:cu\s+)?mrv\s+(?:si|și)\s+forward\s*checking", "backtracking with mrv + forward checking"),
-        (r"mrv\s*\+?\s*forward\s*checking", "backtracking with mrv + forward checking"),
-        (r"mrv\s+(?:si|și|and)\s+fc", "backtracking with mrv + forward checking"),
-        (r"mrv\s*\+\s*fc", "backtracking with mrv + forward checking"),
+        (r"mrv\s+forward\s*checking", "backtracking with mrv + forward checking"),
+        (r"mrv\s+(?:si|și|and|cu)\s+fc", "backtracking with mrv + forward checking"),
+        (r"\bmrv\s+fc\b", "backtracking with mrv + forward checking"),  # mrv fc (after + removed)
+        (r"\bmrv\b", "backtracking with mrv + forward checking"),  # just mrv alone
         
         # Recursive/Divide and Conquer
-        (r"recursive\s+strategy\s*\(?\s*divide\s+(?:and|et|si|și)\s+conquer\s*\)? ", "recursive strategy (divide and conquer)"),
+        (r"recursive\s+strategy\s*\(?\s*divide\s+(?:and|et|si|și)\s+conquer\s*\)?", "recursive strategy (divide and conquer)"),
         (r"recursive\s+strategy", "recursive strategy (divide and conquer)"),
         (r"divide\s+(?:and|et|si|și)\s+conquer", "recursive strategy (divide and conquer)"),
-        (r"strategia?\s+recursiva? ", "recursive strategy (divide and conquer)"),
-        (r"frame[\s-]? stewart", "recursive strategy (divide and conquer)"),
+        (r"strategia?\s+recursiva?", "recursive strategy (divide and conquer)"),
+        (r"frame[\s-]?stewart", "recursive strategy (divide and conquer)"),
         
         # Warnsdorff
         (r"warnsdorff", "warnsdorff heuristic (greedy)"),
         (r"euristica\s+greedy\s+(?:pentru\s+)?knight", "warnsdorff heuristic (greedy)"),
         
         # AC-3
-        (r"ac-? 3\s+(?:with\s+)?backtracking", "ac-3 with backtracking"),
+        (r"ac-?3\s+(?:with\s+)?backtracking", "ac-3 with backtracking"),
         (r"arc\s+consistency", "ac-3 with backtracking"),
         (r"consistenta\s+(?:de\s+)?arc", "ac-3 with backtracking"),
         
         # Min-conflicts
-        (r"min-? conflicts? ", "min-conflicts heuristic"),
+        (r"min-?conflicts?", "min-conflicts heuristic"),
         (r"conflicte\s+minime", "min-conflicts heuristic"),
         (r"minimizarea?\s+conflictelor", "min-conflicts heuristic"),
         
@@ -916,7 +1032,7 @@ class SmartEvaluator:
                 overlap = any(not (e <= us or s >= ue) for us, ue in used)
                 if not overlap:
                     used.append((s, e))
-                    found. append({
+                    found.append({
                         'canonical': canonical,
                         'start': s,
                         'end': e,
@@ -1020,7 +1136,7 @@ class SmartEvaluator:
             return 'negative'
 
         immediate_right = text_norm[end:end + 30]
-        if any(cond in immediate_right. split() for cond in CONDITIONAL_WORDS):
+        if any(cond in immediate_right.split() for cond in CONDITIONAL_WORDS):
             return 'negative'
 
         # Verificare cu SpaCy dacă e disponibil
@@ -1075,7 +1191,7 @@ class SmartEvaluator:
                 'strategy': best['canonical'],
                 'polarity': 'positive' if coherence['is_coherent'] else 'contradictory',
                 'confidence': 0.95 if coherence['is_coherent'] else 0.3,
-                'coherence_issue': coherence. get('penalty_reason'),
+                'coherence_issue': coherence.get('penalty_reason'),
                 'alternative_proposed': coherence.get('alternative_proposed')
             }
         
@@ -1117,7 +1233,7 @@ class SmartEvaluator:
         feedback = []
         
         if problem_type == "n-queens" and calculations:
-            N = calculations. get("N", 0)
+            N = calculations.get("N", 0)
             correct_factorial = calculations.get("factorial_space", 0)
             
             # Caută menționarea lui N! 
@@ -1128,18 +1244,18 @@ class SmartEvaluator:
             ]
             
             for pattern in factorial_patterns:
-                match = re.search(pattern, user_text. replace(",", ""). replace(".", ""))
+                match = re.search(pattern, user_text.replace(",", ""). replace(".", ""))
                 if match:
                     try:
-                        user_value = int(re.sub(r'\D', '', match. group(1)))
+                        user_value = int(re.sub(r'\D', '', match.group(1)))
                         if user_value > 0:
                             # Verificăm cu toleranță de 10%
                             if 0.9 * correct_factorial <= user_value <= 1.1 * correct_factorial:
                                 bonus += 0.08
-                                feedback. append(f"✓ Calcul corect pentru {N}!")
+                                feedback.append(f"✓ Calcul corect pentru {N}!")
                             elif user_value != correct_factorial:
                                 bonus -= 0.05
-                                feedback. append(f"✗ {N}! = {_format_large_number(correct_factorial)}")
+                                feedback.append(f"✗ {N}! = {_format_large_number(correct_factorial)}")
                     except (ValueError, TypeError):
                         pass
                     break
@@ -1164,7 +1280,7 @@ class SmartEvaluator:
                 feedback.append("✓ Corect: graf rar")
             elif mentions_sparse and is_dense:
                 bonus -= 0.08
-                feedback. append(f"✗ Graful este DENS (densitate {density:.1%})")
+                feedback.append(f"✗ Graful este DENS (densitate {density:.1%})")
         
         elif problem_type == "generalized hanoi" and calculations:
             disks = calculations.get("disks", 0)
@@ -1178,25 +1294,232 @@ class SmartEvaluator:
         return bonus, feedback
 
     @staticmethod
+    def _analyze_logical_structure(user_text: str) -> Dict[str, Any]:
+        """
+        Analizează structura logică a argumentării.
+        Verifică prezența conectivelor logice și a raționamentului.
+        """
+        text_norm = _normalize(user_text)
+        
+        # Conectori logici care indică raționament
+        causality_markers = [
+            r"\bdeoarece\b", r"\bpentru\s+ca\b", r"\bfiindca\b",
+            r"\bdin\s+cauza\b", r"\bdatorita\b", r"\bintrucat\b",
+            r"\bbecause\b", r"\bsince\b", r"\bas\s+a\s+result\b",
+            r"\bde\s+aceea\b", r"\bprin\s+urmare\b", r"\bastfel\b",
+            r"\bin\s+consecinta\b", r"\bdeci\b", r"\btherefore\b",
+            r"\bthus\b", r"\bhence\b"
+        ]
+        
+        contrast_markers = [
+            r"\bdar\b", r"\binsa\b", r"\btotusi\b", r"\bpe\s+de\s+alta\s+parte\b",
+            r"\bin\s+schimb\b", r"\bspre\s+deosebire\b",
+            r"\bbut\b", r"\bhowever\b", r"\balthough\b", r"\bwhile\b"
+        ]
+        
+        reasoning_indicators = [
+            r"\bmai\s+eficient\b", r"\bmai\s+rapid\b", r"\bmai\s+bun\b",
+            r"\boptim\b", r"\bcel\s+mai\s+bun\b", r"\bgaranteaza\b",
+            r"\breduce\b", r"\bminimizeaza\b", r"\bmaximizeaza\b",
+            r"\bcomplexitat\b", r"\bo\s*\(\b", r"\bexponential\b",
+            r"\bpolinomial\b", r"\bliniar\b"
+        ]
+        
+        has_causality = any(re.search(p, text_norm) for p in causality_markers)
+        has_contrast = any(re.search(p, text_norm) for p in contrast_markers)
+        has_reasoning = any(re.search(p, text_norm) for p in reasoning_indicators)
+        
+        # Calculăm scorul de structură logică
+        logic_score = 0.0
+        if has_causality:
+            logic_score += 0.4
+        if has_contrast:
+            logic_score += 0.2
+        if has_reasoning:
+            logic_score += 0.4
+        
+        return {
+            "logic_score": min(1.0, logic_score),
+            "has_causality": has_causality,
+            "has_contrast": has_contrast,
+            "has_reasoning": has_reasoning
+        }
+
+    @staticmethod
+    def _detect_depth_of_explanation(user_text: str, problem_type: str) -> Dict[str, Any]:
+        """
+        Detectează profunzimea explicației.
+        Verifică dacă utilizatorul explică DE CE, nu doar CE.
+        """
+        text_norm = _normalize(user_text)
+        
+        # Indicatori de profunzime
+        depth_indicators = {
+            "mentions_complexity": bool(re.search(r"\bcomplexitat\b|\bo\s*\(|\bexponential\b|\bfactorial\b|\bpolinomial\b", text_norm)),
+            "explains_why": bool(re.search(r"\bde\s+ce\b|\bpentru\s+ca\b|\bdeoarece\b|\bfiindca\b|\bacest\s+lucru\b|\basta\s+pentru\b", text_norm)),
+            "mentions_tradeoffs": bool(re.search(r"\bavantaj\b|\bdezavantaj\b|\bcost\b|\bbenefici\b|\bcompromis\b|\btradeoff\b", text_norm)),
+            "gives_examples": bool(re.search(r"\bde\s+exemplu\b|\bexemplu\b|\bprecum\b|\bca\s+si\b|\bfor\s+example\b", text_norm)),
+            "mentions_parameters": bool(re.search(r"\bn\s*=|\b\d+\s+(?:noduri|muchii|discuri|tije|culori)\b", text_norm))
+        }
+        
+        # Indicatori specifici tipului de problemă
+        if problem_type == "n-queens":
+            depth_indicators["problem_specific"] = bool(re.search(
+                r"\bregina\b|\bcoloana\b|\bdiagonal\b|\battac\b|\bpoziti\b|\bconstrang\b",
+                text_norm
+            ))
+        elif problem_type == "graph coloring":
+            depth_indicators["problem_specific"] = bool(re.search(
+                r"\bnod\b|\bmuchie\b|\bculoa\b|\badiacen\b|\bdens\b|\brar\b|\bgrad\b",
+                text_norm
+            ))
+        elif problem_type == "generalized hanoi":
+            depth_indicators["problem_specific"] = bool(re.search(
+                r"\bdisc\b|\btija\b|\bmuta\b|\brecursi\b|\bsubproblema\b|\bframe\b|\bstewart\b",
+                text_norm
+            ))
+        elif problem_type == "knight's tour":
+            depth_indicators["problem_specific"] = bool(re.search(
+                r"\bcal\b|\bmutare\b|\bwarnsdorff\b|\bgrad\b|\bcasuta\b|\btabla\b",
+                text_norm
+            ))
+        else:
+            depth_indicators["problem_specific"] = False
+        
+        # Calculăm scorul de profunzime
+        score = 0.0
+        weights = {
+            "mentions_complexity": 0.25,
+            "explains_why": 0.25,
+            "mentions_tradeoffs": 0.15,
+            "gives_examples": 0.1,
+            "mentions_parameters": 0.1,
+            "problem_specific": 0.15
+        }
+        
+        for key, weight in weights.items():
+            if depth_indicators.get(key, False):
+                score += weight
+        
+        return {
+            "depth_score": min(1.0, score),
+            **depth_indicators
+        }
+
+    @staticmethod
+    def _check_forbidden_concepts_with_context(text_norm: str, forbidden_concepts: List[str]) -> List[str]:
+        """
+        Verifică conceptele interzise ținând cont de context.
+        NU penalizează mențiunile în context negativ sau comparativ.
+        """
+        violations = []
+        
+        for bad in forbidden_concepts:
+            bad_norm = _normalize(bad)
+            if len(bad_norm) < 3:
+                continue
+            
+            # Verificăm dacă conceptul apare în text
+            if bad_norm not in text_norm:
+                continue
+            
+            # GĂSIT - acum verificăm CONTEXTUL
+            escaped_bad = re.escape(bad_norm)
+            pattern = rf"(.{{0,80}}){escaped_bad}(.{{0,50}})"
+            match = re.search(pattern, text_norm)
+            
+            if not match:
+                continue
+            
+            left_context = match.group(1)
+            right_context = match.group(2)
+            full_context = left_context + bad_norm + right_context
+            
+            # Lista de indicatori că conceptul e CRITICAT sau COMPARAT negativ
+            negative_patterns = [
+                r"nu\s+(?:\w+\s+){0,3}" + escaped_bad,
+                r"nici\s+(?:\w+\s+){0,2}" + escaped_bad,
+                r"fara\s+(?:\w+\s+){0,2}" + escaped_bad,
+                r"evit\w*\s+(?:\w+\s+){0,2}" + escaped_bad,
+                r"(?:ar\s+fi|e|este|sunt)\s+(?:imposibil|ineficient|lent|prea|gresit)",
+                r"nu\s+(?:necesita|folosim|avem|e|este)",
+                r"(?:imposibil|ineficient|nepractice?)\s+(?:pentru|de|sa)",
+                r"(?:in\s+schimb|spre\s+deosebire|fata\s+de|comparativ)",
+                r"(?:in\s+loc\s+de|vs|versus)",
+            ]
+            
+            # Indicatori simpli în context
+            safe_context_left = [
+                "nu ", "nici ", "fara ", "evita", "imposibil", "ineficient",
+                "nepracti", "ar explora", "ar fi ", "in schimb", "spre deosebire",
+                "nu necesita", "nu folosim", "nu avem nevoie", "nu e nevoie",
+                "spre deosebire de", "fata de", "comparativ cu", "vs ", "versus "
+            ]
+            
+            safe_context_right = [
+                "ar fi imposibil", "ar fi ineficient", "ar fi lent",
+                "e imposibil", "imposibil de", "ar explora",
+                "nepracti", "ineficient", "nu functioneaza", "nu ar merge"
+            ]
+            
+            is_safe = False
+            
+            # Verificăm context stâng
+            for neg in safe_context_left:
+                if neg in left_context:
+                    is_safe = True
+                    break
+            
+            # Verificăm context drept
+            if not is_safe:
+                for neg in safe_context_right:
+                    if neg in right_context:
+                        is_safe = True
+                        break
+            
+            # Verificăm pattern-uri regex
+            if not is_safe:
+                for patt in negative_patterns:
+                    if re.search(patt, full_context):
+                        is_safe = True
+                        break
+            
+            # Dacă NU e în context negativ, adăugăm la violări
+            if not is_safe:
+                violations.append(bad)
+        
+        return violations
+
+    @staticmethod
     def check_reasoning(user_text: str, required_concepts: List[str], 
                        forbidden_concepts: List[str], ideal_explanation: str = "",
                        correct_strategy: str = "", calculations: Dict[str, Any] = None,
-                       problem_type: str = "") -> Tuple[float, List[str], Optional[str], List[str]]:
+                       problem_type: str = "") -> Tuple[float, List[str], Optional[str], List[str], Dict[str, Any]]:
         """
         Analizează argumentarea folosind:
         1. Detecția de concepte (Regex + SpaCy)
         2. Similaritate semantică (SBERT - LOCAL, fără API!)
-        3.  Verificare calcule numerice
+        3. Verificare calcule numerice
+        4. Analiză structură logică
+        5. Analiză profunzime explicație
         
         Returns:
-            Tuple: (score, violations, wrong_strategy_detected, numerical_feedback)
+            Tuple: (score, violations, wrong_strategy_detected, numerical_feedback, analysis_details)
         """
         if not user_text or not user_text.strip():
-            return 0.0, [], None, []
+            analysis_details = {
+                "keywords": 0.0,
+                "semantic": 0.0,
+                "logic": 0.0,
+                "depth": 0.0,
+                "numerical": 0.0,
+                "has_violations": False,
+            }
+            return 0.0, [], None, [], analysis_details
         
         text_norm = _normalize(user_text)
         
-        # 1.  DETECTARE STRATEGIE DIN DESCRIERE (poate indica confuzie)
+        # 1. DETECTARE STRATEGIE DIN DESCRIERE (poate indica confuzie)
         described_strategy = _detect_strategy_from_description(user_text)
         wrong_strategy_detected = None
         if described_strategy and correct_strategy:
@@ -1204,92 +1527,21 @@ class SmartEvaluator:
             described_norm = _normalize(described_strategy)
             if described_norm != correct_norm and correct_norm not in described_norm and described_norm not in correct_norm:
                 wrong_strategy_detected = described_strategy
-        
-            # 2. VERIFICARE CONCEPTE INTERZISE (cu detectare context)
-            violations = []
-            for bad in forbidden_concepts:
-                bad_norm = _normalize(bad)
-                if len(bad_norm) < 3:
-                    continue
-                
-                # Verificăm dacă conceptul apare în text
-                if bad_norm not in text_norm:
-                    continue
-                
-                # GĂSIT - acum verificăm CONTEXTUL
-                # Pattern pentru a extrage textul din jurul conceptului
-                escaped_bad = re. escape(bad_norm)
-                pattern = rf"(.{{0,80}})\b{escaped_bad}\b(.{{0,50}})"
-                match = re.search(pattern, text_norm)
-                
-                if not match:
-                    # Încearcă fără word boundaries pentru concepte compuse
-                    pattern = rf"(.{{0,80}}){escaped_bad}(.{{0,50}})"
-                    match = re.search(pattern, text_norm)
-                
-                if match:
-                    left_context = match.group(1)
-                    right_context = match.group(2)
-                    full_context = left_context + bad_norm + right_context
-                    
-                    # Lista de indicatori că conceptul e CRITICAT sau COMPARAT negativ
-                    negative_patterns = [
-                        # Negații
-                        r"nu\s+(?:\w+\s+){0,3}" + escaped_bad,
-                        r"nici\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        r"fara\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        r"evit\w*\s+(?:\w+\s+){0,2}" + escaped_bad,
-                        # Critici în context stâng
-                        r"(?:ar\s+fi|e|este|sunt)\s+(?:imposibil|ineficient|lent|prea|gresit)",
-                        r"nu\s+(?:necesita|folosim|avem|e|este)",
-                        r"(?:imposibil|ineficient|nepractice? )\s+(?:pentru|de|sa)",
-                        # Comparații
-                        r"(?:in\s+schimb|spre\s+deosebire|fata\s+de|comparativ)",
-                        r"(?:in\s+loc\s+de|vs|versus)",
-                    ]
-                    
-                    # Indicatori simpli în context
-                    negative_words_left = [
-                        "nu ", "nici ", "fara ", "evita", "imposibil", "ineficient",
-                        "nepracti", "ar explora", "ar fi ", "in schimb", "spre deosebire",
-                        "nu necesita", "nu folosim", "nu avem nevoie", "nu e nevoie"
-                    ]
-                    
-                    negative_words_right = [
-                        "ar fi imposibil", "ar fi ineficient", "ar fi lent",
-                        "e imposibil", "imposibil de", "ar explora",
-                        "nepracti", "ineficient"
-                    ]
-                    
-                    is_safe = False
-                    
-                    # Verificăm context stâng
-                    for neg in negative_words_left:
-                        if neg in left_context:
-                            is_safe = True
-                            break
-                    
-                    # Verificăm context drept
-                    if not is_safe:
-                        for neg in negative_words_right:
-                            if neg in right_context:
-                                is_safe = True
-                                break
-                    
-                    # Verificăm pattern-uri regex
-                    if not is_safe:
-                        for pattern in negative_patterns:
-                            if re.search(pattern, full_context):
-                                is_safe = True
-                                break
-                    
-                    # Dacă NU e în context negativ, adăugăm la violări
-                    if not is_safe:
-                        violations.append(bad)
+
+        # 2. VERIFICARE CONCEPTE INTERZISE (cu detectare context)
+        violations = SmartEvaluator._check_forbidden_concepts_with_context(text_norm, forbidden_concepts)
 
         # Dacă avem violări grave sau strategie greșită detectată
         if violations or wrong_strategy_detected:
-            return 0.1, violations, wrong_strategy_detected, []
+            analysis_details = {
+                "keywords": 0.0,
+                "semantic": 0.0,
+                "logic": 0.0,
+                "depth": 0.0,
+                "numerical": 0.0,
+                "has_violations": True,
+            }
+            return 0.1, violations, wrong_strategy_detected, [], analysis_details
 
         # 3. VERIFICARE CALCULE NUMERICE
         numerical_bonus = 0.0
@@ -1299,7 +1551,15 @@ class SmartEvaluator:
                 user_text, calculations, problem_type
             )
 
-        # 4. VERIFICARE CONCEPTE NECESARE (required_concepts)
+        # 4. ANALIZĂ STRUCTURĂ LOGICĂ
+        logic_analysis = SmartEvaluator._analyze_logical_structure(user_text)
+        logic_score = logic_analysis["logic_score"]
+
+        # 5. ANALIZĂ PROFUNZIME EXPLICAȚIE
+        depth_analysis = SmartEvaluator._detect_depth_of_explanation(user_text, problem_type)
+        depth_score = depth_analysis["depth_score"]
+
+        # 6. VERIFICARE CONCEPTE NECESARE (required_concepts)
         hits = 0
         doc = None
         if nlp:
@@ -1320,8 +1580,8 @@ class SmartEvaluator:
                     if c_norm in tok_norm or tok_norm in c_norm:
                         # Verificăm că nu e negat
                         is_neg = False
-                        left_tokens = list(doc[max(0, token. i - 4):token.i])
-                        if any(_normalize(t. text) in NEGATION_WORDS for t in left_tokens):
+                        left_tokens = list(doc[max(0, token.i - 4):token.i])
+                        if any(_normalize(t.text) in NEGATION_WORDS for t in left_tokens):
                             is_neg = True
                         if not is_neg:
                             found_pos = True
@@ -1335,19 +1595,19 @@ class SmartEvaluator:
             # Fallback fără SpaCy
             keyword_score = sum(1 for c in required_concepts if _normalize(c) in text_norm) / max(1, len(required_concepts))
 
-        # 5. SIMILARITATE SEMANTICĂ (SBERT - rulează LOCAL!)
+        # 7. SIMILARITATE SEMANTICĂ (SBERT - rulează LOCAL!)
         similarity_score = 0.0
         if ideal_explanation and semantic_model:
             try:
                 # Calculăm embeddings (LOCAL, fără API)
-                emb_ideal = semantic_model. encode(ideal_explanation, convert_to_tensor=True)
-                emb_user = semantic_model. encode(user_text, convert_to_tensor=True)
+                emb_ideal = semantic_model.encode(ideal_explanation, convert_to_tensor=True)
+                emb_user = semantic_model.encode(user_text, convert_to_tensor=True)
                 
                 # Similaritate cosinus
-                similarity_score = util.cos_sim(emb_ideal, emb_user). item()
+                similarity_score = util.cos_sim(emb_ideal, emb_user).item()
                 
-                # Normalizare: SBERT dă scoruri între -1 și 1, dar uzual >0. 3
-                # Scalăm [0. 3, 0.85] -> [0.0, 1.0]
+                # Normalizare: SBERT dă scoruri între -1 și 1, dar uzual >0.3
+                # Scalăm [0.3, 0.85] -> [0.0, 1.0]
                 similarity_score = max(0.0, (similarity_score - 0.3) / 0.55)
                 similarity_score = min(1.0, similarity_score)
             except Exception as e:
@@ -1357,12 +1617,32 @@ class SmartEvaluator:
             # Fallback: SequenceMatcher dacă SBERT nu e disponibil
             similarity_score = SequenceMatcher(None, text_norm, _normalize(ideal_explanation)).ratio()
 
-        # 6.  SCOR FINAL COMBINAT
-        # Pondere: 35% Keywords + 55% Semantică + 10% Bonus calcule
-        base_score = (keyword_score * 0.35) + (similarity_score * 0.55)
+        # 8. SCOR FINAL COMBINAT cu criterii multiple
+        # - 15% Keywords
+        # - 25% Semantică
+        # - 10% Structură logică
+        # - 10% Profunzime
+        base_score = (
+            (keyword_score * 0.15) +
+            (similarity_score * 0.25) +
+            (logic_score * 0.10) +
+            (depth_score * 0.10)
+        )
+
         final_score = min(1.0, max(0.0, base_score + numerical_bonus))
-        
-        return final_score, [], None, numerical_feedback
+
+        analysis_details = {
+            "keywords": round(keyword_score, 3),
+            "semantic": round(similarity_score, 3),
+            "logic": round(logic_score, 3),
+            "depth": round(depth_score, 3),
+            "numerical": round(numerical_bonus, 3),
+            "has_violations": False,
+            "logic_features": logic_analysis,
+            "depth_features": depth_analysis,
+        }
+
+        return final_score, [], None, numerical_feedback, analysis_details
 
 
 # =======================================================================
@@ -1376,7 +1656,7 @@ def _detect_ground_contradiction(user_text: str, item_context: Dict[str, Any],
     """
     t = _normalize(user_text)
     ptype = item_context.get('problem_type')
-    params = item_context. get('params', {})
+    params = item_context.get('params', {})
     calculations = truth.get('calculations', {})
 
     if ptype == 'graph coloring':
@@ -1385,10 +1665,10 @@ def _detect_ground_contradiction(user_text: str, item_context: Dict[str, Any],
         
         # Verificăm să nu fie în context comparativ sau negativ
         says_dense = bool(re.search(r"\b(?:este|e)\s+dens\b", t))
-        says_sparse = bool(re. search(r"\b(?:este|e)\s+(?:rar|sparse)\b", t))
+        says_sparse = bool(re.search(r"\b(?:este|e)\s+(?:rar|sparse)\b", t))
         
         # NU penaliza dacă e în context comparativ
-        is_comparison = bool(re. search(r"(?:daca|if|ar fi|pentru|comparativ|versus|fata de|spre deosebire)", t))
+        is_comparison = bool(re.search(r"(?:daca|if|ar fi|pentru|comparativ|versus|fata de|spre deosebire)", t))
         
         if not is_comparison:
             if says_sparse and is_dense:
@@ -1401,9 +1681,9 @@ def _detect_ground_contradiction(user_text: str, item_context: Dict[str, Any],
         N = calculations.get('N', params.get('N', 8))
         
         # Verificăm context
-        is_comparison = bool(re. search(r"(?:daca|if|ar fi|pentru|comparativ|versus|in schimb)", t))
+        is_comparison = bool(re.search(r"(?:daca|if|ar fi|pentru|comparativ|versus|in schimb)", t))
         
-        says_small = bool(re. search(r"\b(?:este|e)\s+(?:mic|simplu|usor)\b", t))
+        says_small = bool(re.search(r"\b(?:este|e)\s+(?:mic|simplu|usor)\b", t))
         says_large = bool(re.search(r"\b(?:este|e)\s+(?:mare|complex|enorm)\b", t))
         
         if not is_comparison:
@@ -1413,7 +1693,7 @@ def _detect_ground_contradiction(user_text: str, item_context: Dict[str, Any],
                 return f"Afirmi că N={N} e mare/complex, dar este gestionabil pentru Backtracking."
 
     if ptype == 'generalized hanoi':
-        is_classic = calculations. get('is_classic', True)
+        is_classic = calculations.get('is_classic', True)
         pegs = calculations.get('pegs', params.get('pegs', 3))
         
         # IMPORTANT: NU penaliza mențiunile comparative! 
@@ -1490,7 +1770,7 @@ def generate_n(n: int, selected_topics: List[str] = None) -> List[Dict[str, Any]
         params = t["params_gen"]()
         
         # Calculăm răspunsul corect DINAMIC (nu hardcodat!)
-        truth = StrategySolver. solve(t["type"], params)
+        truth = StrategySolver.solve(t["type"], params)
         correct_strat = truth["best_strategy"]
         
         # Generăm distractori INTELIGENȚI bazați pe parametri
@@ -1514,16 +1794,16 @@ def generate_n(n: int, selected_topics: List[str] = None) -> List[Dict[str, Any]
 
 def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, Any]:
     ptype = item_context.get("problem_type")
-    params = item_context. get("params", {})
+    params = item_context.get("params", {})
     
-    truth = StrategySolver. solve(ptype, params)
+    truth = StrategySolver.solve(ptype, params)
     correct_strategy = truth["best_strategy"]
     required_concepts = truth["required_concepts"]
-    forbidden_concepts = truth. get("forbidden_concepts", [])
+    forbidden_concepts = truth.get("forbidden_concepts", [])
     ideal_explanation = truth["reasoning_summary"]
     calculations = truth.get("calculations", {})
 
-    if not user_text or len(user_text. strip()) < 5:
+    if not user_text or len(user_text.strip()) < 5:
         return {
             "score": 0.0,
             "components": {
@@ -1565,23 +1845,15 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
         polarity = selection['polarity']
         detected_strat = f"{user_strat} ({polarity})"
         
-        user_strat_norm = _normalize(user_strat)
-        correct_strat_norm = _normalize(correct_strategy)
-        
-        is_exact_match = user_strat_norm == correct_strat_norm
-        is_partial_match = False
-        if not is_exact_match:
-            if len(user_strat_norm) >= 8 and len(correct_strat_norm) >= 8:
-                if user_strat_norm in correct_strat_norm or correct_strat_norm in user_strat_norm:
-                    is_partial_match = True
-        is_match = is_exact_match or is_partial_match
+        # Folosim noua funcție de potrivire a strategiilor
+        is_match, match_confidence = _strategies_match(user_strat, correct_strategy)
 
         if polarity == "contradictory":
             score_selection = 0.0
             status_msg = "Răspuns incoerent (contradicție internă detectată)."
         elif polarity == "positive":
             if is_match:
-                score_selection = 1.0 if is_exact_match else 0.85
+                score_selection = match_confidence
                 status_msg = "Strategie corectă identificată."
             else:
                 score_selection = 0.0
@@ -1597,7 +1869,7 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
         status_msg = "Nu am identificat clar o strategie în răspunsul tău."
         score_selection = 0.0
 
-    score_reasoning, violations, wrong_strategy, numerical_feedback = SmartEvaluator.check_reasoning(
+    score_reasoning, violations, wrong_strategy, numerical_feedback, analysis_details = SmartEvaluator.check_reasoning(
         user_text, 
         required_concepts, 
         forbidden_concepts, 
@@ -1623,15 +1895,14 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
     if ptype == "generalized hanoi":
         pegs = calculations.get('pegs', params.get('pegs', 3))
         disks = calculations.get('disks', params.get('disks', 5))
-        is_classic = calculations. get('is_classic', pegs == 3)
+        is_classic = calculations.get('is_classic', pegs == 3)
         
         if not is_classic:  # 4+ tije
             classic_formula_result = 2**disks - 1
             text_lower = user_text.lower()
             
             # Verifică dacă menționează formula clasică greșit
-            if str(classic_formula_result) in text_lower or f"2^{disks}-1" in text_lower. replace(" ", ""):
-                formula_error = True
+            if str(classic_formula_result) in text_lower or f"2^{disks}-1" in text_lower.replace(" ", ""):
                 status_msg += f" EROARE FACTUALĂ: Formula 2^{disks}-1={classic_formula_result} e pentru 3 tije, nu {pegs}!"
                 score_reasoning *= 0.5  # Penalizare 50% pentru eroare factuală
     # ================================================
@@ -1646,7 +1917,7 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
     if numerical_feedback:
         status_msg += " " + " | ".join(numerical_feedback)
 
-    # 5.   CALCULEAZĂ SCORUL FINAL (0-100)
+    # 5. CALCULEAZĂ SCORUL FINAL (0-100)
     
     if wrong_strategy:
         base_score = 10 + (score_reasoning * 15)
@@ -1709,7 +1980,16 @@ def evaluate_answer(user_text: str, item_context: Dict[str, Any]) -> Dict[str, A
             "violations_detected": violations if violations else [],
             "wrong_strategy_detected": wrong_strategy,
             "word_count": word_count,
-            "message": status_msg
+            "message": status_msg,
+            "analysis_breakdown": {
+                "keywords_score": analysis_details.get("keywords", 0.0) * 100,
+                "semantic_score": analysis_details.get("semantic", 0.0) * 100,
+                "logic_score": analysis_details.get("logic", 0.0) * 100,
+                "depth_score": analysis_details.get("depth", 0.0) * 100,
+                "has_causality": analysis_details.get("logic_features", {}).get("has_reasoning", False),
+                "mentions_complexity": analysis_details.get("depth_features", {}).get("mentions_complexity", False),
+                "explains_why": analysis_details.get("depth_features", {}).get("explains_why", False),
+            },
         }
     }
 
@@ -1722,24 +2002,24 @@ def save_public_questions(items: List[Dict[str, Any]], path: str) -> None:
     public_items = []
     for item in items:
         public_item = {
-            "index": item. get("index"),
+            "index": item.get("index"),
             "type": item.get("type"),
-            "problem_type": item. get("problem_type"),
+            "problem_type": item.get("problem_type"),
             "question": item.get("question"),
             "params": item.get("params"),
-            "options": item. get("options")
+            "options": item.get("options")
         }
         public_items.append(public_item)
     
     with open(path, "w", encoding="utf-8") as f:
-        json. dump(public_items, f, ensure_ascii=False, indent=2)
+        json.dump(public_items, f, ensure_ascii=False, indent=2)
 
 
 def save_answer_key(items: List[Dict[str, Any]], path: str) -> None:
     """Salvează answer key-ul (include parametrii pentru recalculare)."""
     # Answer key-ul conține parametrii - răspunsul se recalculează dinamic
     with open(path, "w", encoding="utf-8") as f:
-        json. dump(items, f, ensure_ascii=False, indent=2)
+        json.dump(items, f, ensure_ascii=False, indent=2)
 
 
 # =======================================================================
