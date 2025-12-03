@@ -1018,9 +1018,15 @@ class SmartEvaluator:
             return 'negative'
         if any(neg in left_window for neg in NEGATION_VERBS):
             return 'negative'
+        
+        # Also check for negation words in the wider context when followed by "precum" (such as/like)
+        # This handles cases like "fără overhead-ul ... precum AC-3"
+        if 'precum' in left_window or 'ca ' in left_window or 'cum ar fi' in left_window:
+            if any(tok in NEGATION_WORDS for tok in left_window.split()):
+                return 'negative'
 
         immediate_right = text_norm[end:end + 30]
-        if any(cond in immediate_right. split() for cond in CONDITIONAL_WORDS):
+        if any(cond in immediate_right.split() for cond in CONDITIONAL_WORDS):
             return 'negative'
 
         # Verificare cu SpaCy dacă e disponibil
@@ -1028,7 +1034,7 @@ class SmartEvaluator:
             try:
                 for token in nlp_doc:
                     if token.idx <= mention['start'] * 1.2:
-                        if any(c. dep_ == 'neg' or _normalize(c.text) in NEGATION_WORDS for c in token. children):
+                        if any(c.dep_ == 'neg' or _normalize(c.text) in NEGATION_WORDS for c in token.children):
                             return 'negative'
                         if token.head and token.head.pos_ == 'VERB':
                             if _normalize(token.head.lemma_) in NEGATION_VERBS:
@@ -1060,8 +1066,10 @@ class SmartEvaluator:
         analyzed = []
         for m in mentions:
             polarity = SmartEvaluator._detect_polarity_for_mention(text, m, nlp_doc)
+            # Normalize canonical strategy for comparison with normalized options
+            canonical_norm = _normalize(m['canonical'])
             in_context = any(
-                m['canonical']. lower() in c or c in m['canonical'].lower()
+                canonical_norm in c or c in canonical_norm
                 for c in context_norm
             )
             analyzed.append({**m, 'polarity': polarity, 'in_context': in_context})
@@ -1212,13 +1220,28 @@ class SmartEvaluator:
                 if len(bad_norm) < 3:
                     continue
                 
-                # Verificăm dacă conceptul apare în text
-                if bad_norm not in text_norm:
-                    continue
+                # IMPORTANT: Check if forbidden concept appears as standalone word/phrase
+                # This prevents "dens" from matching "densitate" (density measurement)
+                escaped_bad = re.escape(bad_norm)
+                # First try with word boundaries - this is the strict check
+                pattern_strict = rf"\b{escaped_bad}\b"
+                if not re.search(pattern_strict, text_norm):
+                    # If no word boundary match, check if it's a multi-word concept
+                    # that might span words (e.g., "arc consistency")
+                    if " " not in bad_norm:
+                        # Single word concepts must match as standalone words
+                        continue
+                    # Multi-word concepts: check if all words are present as standalone
+                    words = bad_norm.split()
+                    all_words_present = all(
+                        re.search(rf"\b{re.escape(w)}\b", text_norm) 
+                        for w in words
+                    )
+                    if not all_words_present:
+                        continue
                 
                 # GĂSIT - acum verificăm CONTEXTUL
                 # Pattern pentru a extrage textul din jurul conceptului
-                escaped_bad = re. escape(bad_norm)
                 pattern = rf"(.{{0,80}})\b{escaped_bad}\b(.{{0,50}})"
                 match = re.search(pattern, text_norm)
                 
